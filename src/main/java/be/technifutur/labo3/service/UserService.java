@@ -4,11 +4,13 @@ import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.User;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.UserRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 public class  UserService implements Crudable<User, UserDTO, Integer> {
 
     private final UserRepository userRepository;
