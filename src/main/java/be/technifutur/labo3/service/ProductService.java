@@ -51,6 +51,7 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     @Override
     public boolean delete(Integer integer) {
-        return false;
+        productRepository.deleteById(integer);
+        return !productRepository.existsById(integer);
     }
 }
