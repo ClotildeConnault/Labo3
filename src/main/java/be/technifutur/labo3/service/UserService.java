@@ -9,7 +9,7 @@ import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
-public class UserService implements Crudable<User, UserDTO, Integer> {
+public class  UserService implements Crudable<User, UserDTO, Integer> {
 
     private final UserRepository userRepository;
     private final Mapper mapper;
