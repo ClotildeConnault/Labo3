@@ -4,11 +4,13 @@ import be.technifutur.labo3.dto.CategoryDTO;
 import be.technifutur.labo3.entity.Category;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.CategoryRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
+@Service
 public class CategoryService implements Crudable<Category, CategoryDTO, Integer> {
 
     private final CategoryRepository categoryRepository;
