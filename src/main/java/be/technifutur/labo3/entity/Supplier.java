@@ -12,7 +12,7 @@ import java.util.List;
 
 @Entity
 @Data
-@FieldDefaults(level = AccessLevel.PRIVATE)
+@FieldDefaults(level = Lombok.AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
@@ -37,6 +37,6 @@ public class Supplier {
     @UpdateTimestamp
     Instant updateDate;
 
-    @OneToMany
+    @OneToMany(mappedBy = "supplier")
     List<Product> products;
 }
