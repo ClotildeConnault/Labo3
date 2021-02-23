@@ -1,18 +1,31 @@
 package be.technifutur.labo3.mapper;
 
+import be.technifutur.labo3.dto.CategoryDTO;
 import be.technifutur.labo3.dto.ProductDTO;
 import be.technifutur.labo3.dto.SupplierDTO;
-import be.technifutur.labo3.entity.Product;
-import be.technifutur.labo3.entity.Supplier;
+import be.technifutur.labo3.entity.*;
 import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.Product;
-import be.technifutur.labo3.entity.User;
 import org.springframework.stereotype.Service;
 
 import java.util.stream.Collectors;
 
 @Service
 public class Mapper {
+
+    public CategoryDTO toCategoryDTO(Category category) {
+        return CategoryDTO.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .build();
+    }
+
+    public Category toCategoryEntity(CategoryDTO category) {
+        return Category.builder()
+                .id(category.getId())
+                .name(category.getName())
+                .build();
+    }
 
     public ProductDTO toProductDTO(Product product) {
         return ProductDTO.builder()
