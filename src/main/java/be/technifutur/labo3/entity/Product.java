@@ -16,7 +16,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 
-public class Product implements Cloneable {
+public class Product {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -56,21 +56,4 @@ public class Product implements Cloneable {
     @ManyToOne
     private Supplier supplier;
 
-   /* @Override
-    protected Product clone() throws CloneNotSupportedException {
-
-        // Assign the shallow copy to
-        // new reference variable t
-        Product p = (Product)super.clone();
-
-        // Creating a deep copy for c
-
-        t.c.x = c.x;
-        t.c.y = c.y;
-
-        // Create a new object for the field c
-        // and assign it to shallow copy obtained,
-        // to make it a deep copy
-        return t;
-    }*/
 }
