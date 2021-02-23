@@ -41,6 +41,35 @@ public class Mapper {
                 .build();
     }
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
     public UserDTO toUserDTO(User user) {
         return UserDTO.builder()
                 .id(user.getId())
