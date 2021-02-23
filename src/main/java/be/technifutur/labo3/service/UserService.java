@@ -30,7 +30,7 @@ public class  UserService implements Crudable<User, UserDTO, Integer> {
 
     @Override
     public UserDTO getById(Integer integer) {
-        return mapper.toUserDTO(userRepository.findById(integer).orElseThrow(() -> new NoSuchElementException()));
+        return mapper.toUserDTO(userRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("L'utilisateur' avec l'id " + integer + " n'a pas été trouvé")));
     }
 
     @Override
