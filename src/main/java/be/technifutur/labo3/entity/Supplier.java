@@ -13,7 +13,7 @@ import java.util.List;
 
 @Entity
 @Data
-@FieldDefaults(level = Lombok.AccessLevel.PRIVATE)
+@FieldDefaults(level = lombok.AccessLevel.PRIVATE)
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
