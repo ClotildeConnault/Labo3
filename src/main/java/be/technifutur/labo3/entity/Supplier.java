@@ -8,6 +8,7 @@ import org.hibernate.annotations.UpdateTimestamp;
 import javax.persistence.*;
 import javax.persistence.criteria.CriteriaBuilder;
 import java.time.Instant;
+import java.util.List;
 
 @Entity
 @Data
@@ -35,4 +36,7 @@ public class Supplier {
 
     @UpdateTimestamp
     Instant updateDate;
+
+    @OneToMany
+    List<Product> products;
 }
