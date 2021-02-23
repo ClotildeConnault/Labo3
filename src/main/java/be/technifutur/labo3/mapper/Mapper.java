@@ -1,10 +1,15 @@
 package be.technifutur.labo3.mapper;
 
 import be.technifutur.labo3.dto.ProductDTO;
+import be.technifutur.labo3.dto.SupplierDTO;
+import be.technifutur.labo3.entity.Product;
+import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.Product;
 import be.technifutur.labo3.entity.User;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class Mapper {
