@@ -8,6 +8,7 @@ public class Labo3Application {
 
 	public static void main(String[] args) {
 		SpringApplication.run(Labo3Application.class, args);
+		System.out.println("coucou");
 	}
 
 }
