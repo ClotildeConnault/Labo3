@@ -39,7 +39,8 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     @Override
     public boolean insert(Product product) {
-        return false;
+        Product p = productRepository.save(product);
+        return productRepository.existsById(p.getId());
     }
 
     @Override
