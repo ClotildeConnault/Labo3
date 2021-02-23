@@ -46,34 +46,35 @@ public class Mapper {
                 .build();
     }
 
+    public SupplierDTO toSupplierDTO (Supplier supplier){
+        return SupplierDTO.builder()
+                .id(supplier.getId())
+                .companyName(supplier.getCompanyName())
+                .statut(supplier.getStatut())
+                .sector(supplier.getSector())
+                .insertionDate(supplier.getInsertionDate())
+                .updateDate(supplier.getUpdateDate())
+                .products(supplier.getProducts()
+                                .stream()
+                                .map(this::toProductDTO)
+                                .collect(Collectors.toList()))
+                .build();
+    }
 
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
+    public Supplier toSupplierEntity (SupplierDTO dto){
+        return Supplier.builder()
+                .id(dto.getId())
+                .companyName(dto.getCompanyName())
+                .statut(dto.getStatut())
+                .sector(dto.getSector())
+                .insertionDate(dto.getInsertionDate())
+                .updateDate(dto.getUpdateDate())
+                .products(dto.getProducts()
+                        .stream()
+                        .map(this::toProductEntity)
+                        .collect(Collectors.toList()))
+                .build();
+    }
 
     public UserDTO toUserDTO(User user) {
         return UserDTO.builder()
