@@ -1,6 +1,7 @@
 package be.technifutur.labo3.config;
 
 import be.technifutur.labo3.entity.*;
+import be.technifutur.labo3.service.CategoryService;
 import be.technifutur.labo3.service.ProductService;
 import be.technifutur.labo3.service.SupplierService;
 import be.technifutur.labo3.service.UserService;
@@ -60,8 +61,9 @@ public class DataInit implements InitializingBean {
 
     );
 
-    public DataInit(ProductService productService, UserService userService, SupplierService supplierService) {
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService) {
         this.productService = productService;
+        this.categoryService = categoryService;
         this.userService = userService;
         this.supplierService = supplierService;
     }
