@@ -5,6 +5,7 @@ import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.service.SupplierService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.GetMapping;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
@@ -27,8 +28,9 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
     }
 
     @Override
-    public ResponseEntity<SupplierDTO> getOne(Integer integer) {
-        return null;
+    @GetMapping (path = {"/id"})
+    public ResponseEntity<SupplierDTO> getOne(@PathVariable("id") Integer integer) {
+        return ResponseEntity.ok(this.supplierService.getById(integer));
     }
 
     @Override
