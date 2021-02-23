@@ -45,6 +45,8 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     @Override
     public boolean update(Product product, Integer integer) {
+        Product old = productRepository.getOne(integer);
+        Product toTest = new
         return false;
     }
 
