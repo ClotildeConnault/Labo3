@@ -41,11 +41,24 @@ public class UserService implements Crudable<User, UserDTO, Integer> {
 
     @Override
     public boolean update(User user, Integer integer) {
-        return false;
+        User oldUser = this.userRepository.getOne(integer);
+        User userToTest = new User(
+                oldUser.getId(),
+                oldUser.getFirstName(),
+                oldUser.getLastName(),
+                oldUser.getAccessLevel(),
+                oldUser.getPseudo(),
+                oldUser.getPassword(),
+                oldUser.getAddress()
+        );
+        user.setId(integer);
+        this.userRepository.save(user);
+        return !userToTest.equals(this.userRepository.getOne(integer));
     }
 
     @Override
     public boolean delete(Integer integer) {
-        return false;
+        this.userRepository.deleteById(integer);
+        return this.userRepository.findById(integer).isEmpty();
     }
 }
