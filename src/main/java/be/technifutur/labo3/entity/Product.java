@@ -53,6 +53,9 @@ public class Product {
     @ManyToMany
     private List<Category> categories;
 
+    @ManyToOne
+    private Supplier supplier;
+
 
 
 
