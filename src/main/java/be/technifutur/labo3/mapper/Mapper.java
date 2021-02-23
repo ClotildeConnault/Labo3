@@ -1,10 +1,15 @@
 package be.technifutur.labo3.mapper;
 
 import be.technifutur.labo3.dto.ProductDTO;
+import be.technifutur.labo3.dto.SupplierDTO;
+import be.technifutur.labo3.entity.Product;
+import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.Product;
 import be.technifutur.labo3.entity.User;
 import org.springframework.stereotype.Service;
+
+import java.util.stream.Collectors;
 
 @Service
 public class Mapper {
@@ -38,6 +43,36 @@ public class Mapper {
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
                 .TVA(product.getTVA())
+                .build();
+    }
+
+    public SupplierDTO toSupplierDTO (Supplier supplier){
+        return SupplierDTO.builder()
+                .id(supplier.getId())
+                .companyName(supplier.getCompanyName())
+                .statut(supplier.getStatut())
+                .sector(supplier.getSector())
+                .insertionDate(supplier.getInsertionDate())
+                .updateDate(supplier.getUpdateDate())
+                .products(supplier.getProducts()
+                                .stream()
+                                .map(this::toProductDTO)
+                                .collect(Collectors.toList()))
+                .build();
+    }
+
+    public Supplier toSupplierEntity (SupplierDTO dto){
+        return Supplier.builder()
+                .id(dto.getId())
+                .companyName(dto.getCompanyName())
+                .statut(dto.getStatut())
+                .sector(dto.getSector())
+                .insertionDate(dto.getInsertionDate())
+                .updateDate(dto.getUpdateDate())
+                .products(dto.getProducts()
+                        .stream()
+                        .map(this::toProductEntity)
+                        .collect(Collectors.toList()))
                 .build();
     }
 
