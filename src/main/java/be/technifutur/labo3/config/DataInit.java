@@ -57,6 +57,7 @@ public class DataInit implements InitializingBean {
                     .insertDate(Instant.now())
                     .price(2.0)
                     .quantity(12)
+                    .imagePath("https://cdn-s-www.ledauphine.com/images/95A10B41-F408-4B27-8E65-2E89F04ECF54/NW_raw/illustration-1583764974.jpg")
                     .supplier(suppliers.get(0))
                     .categories(Arrays.asList(categories.get(0)))
                     .build(),
