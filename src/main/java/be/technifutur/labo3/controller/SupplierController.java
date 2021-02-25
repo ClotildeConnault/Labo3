@@ -4,10 +4,7 @@ import be.technifutur.labo3.dto.SupplierDTO;
 import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.service.SupplierService;
 import org.springframework.http.ResponseEntity;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RestController;
+import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
@@ -34,17 +31,20 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
     }
 
     @Override
-    public ResponseEntity<Boolean> insert(Supplier supplier) {
-        return null;
+    @PostMapping
+    public ResponseEntity<Boolean> insert(@RequestBody Supplier supplier) {
+        return ResponseEntity.ok(this.supplierService.insert(supplier));
     }
 
     @Override
-    public ResponseEntity<Boolean> update(Supplier supplier, Integer integer) {
-        return null;
+    @PutMapping
+    public ResponseEntity<Boolean> update(@RequestBody Supplier supplier, Integer integer) {
+        return ResponseEntity.ok(this.supplierService.update(supplier,integer));
     }
 
     @Override
+    @DeleteMapping
     public ResponseEntity<Boolean> delete(Integer integer) {
-        return null;
+        return ResponseEntity.ok(this.supplierService.delete(integer));
     }
 }
