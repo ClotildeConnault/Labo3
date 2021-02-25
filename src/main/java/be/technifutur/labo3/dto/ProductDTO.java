@@ -37,5 +37,7 @@ public class ProductDTO {
 
     private double TVA;
 
-    private List<Category> categories;
+    private List<CategoryDTO> categories;
+
+    private SupplierDTO supplier;
 }
