@@ -43,11 +43,16 @@ public class SupplierService  implements Crudable<Supplier, SupplierDTO, Integer
 
     @Override
     public boolean update(Supplier supplier, Integer integer) {
-        return false;
+        Supplier old = this.supplierRepository.getOne(integer);
+        Supplier toTest = new Supplier(old.getId(),old.getCompanyName(),old.getStatut(),old.getSector(),old.getInsertionDate(),old.getUpdateDate(),old.getProducts());
+        supplier.setId(integer);
+        this.supplierRepository.save(supplier);
+        return !toTest.equals(this.supplierRepository.getOne(integer));
     }
 
     @Override
     public boolean delete(Integer integer) {
-        return false;
+        this.supplierRepository.deleteById(integer);
+        return !this.supplierRepository.existsById(integer);
     }
 }
