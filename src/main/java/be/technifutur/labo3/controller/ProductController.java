@@ -53,4 +53,9 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
     public ResponseEntity<List<ProductDTO>> searchByName(@RequestBody String productName){
         return ResponseEntity.ok(service.searchByProductName(productName));
     }
+
+    @GetMapping(path = "/search")
+    public ResponseEntity<List<ProductDTO>> search(@RequestBody Product product){
+        return ResponseEntity.ok(service.searchByProduct(product));
+    }
 }

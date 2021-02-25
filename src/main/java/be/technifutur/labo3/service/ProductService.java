@@ -1,6 +1,8 @@
 package be.technifutur.labo3.service;
 
+import be.technifutur.labo3.dto.CategoryDTO;
 import be.technifutur.labo3.dto.ProductDTO;
+import be.technifutur.labo3.dto.SupplierDTO;
 import be.technifutur.labo3.entity.Category;
 import be.technifutur.labo3.entity.Product;
 import be.technifutur.labo3.entity.QProduct;
@@ -106,6 +108,41 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
         if(productName != null && !productName.equals("")){
             predicate.and(qProduct.name.containsIgnoreCase(productName));
+        }
+
+        Iterable<Product> result = this.productRepository.findAll(predicate);
+
+        return StreamSupport.stream(result.spliterator(),false)
+                .map(mapper::toProductDTO)
+                .collect(Collectors.toList());
+    }
+
+    public List<ProductDTO> searchByProduct(Product product){
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        QProduct qProduct = QProduct.product;
+
+        if(product.getName() != null && !product.getName().equals("")){
+            predicate.and(qProduct.name.containsIgnoreCase(product.getName()));
+        }
+
+        if(product.getDescription() != null && !product.getDescription().equals("")){
+            predicate.and(qProduct.description.containsIgnoreCase((product.getDescription())));
+        }
+
+        // Les produits recherchés auront une date d'expiration postérieure à celle recherchée
+        if (product.getExpirationDate() != null){
+            predicate.and(qProduct.expirationDate.after(product.getExpirationDate()));
+        }
+
+        // Les produits recherchés auront un prix inférieur ou égal à celui recherché
+        if (product.getPrice() > 0){
+            predicate.and(qProduct.price.loe(product.getPrice()));
+        }
+
+        // Les produits recherchés auront une quantité en stock supérieure ou égale à celle recherchée
+        if(product.getQuantity() >0){
+            predicate.and(qProduct.quantity.goe((product.getQuantity())));
         }
 
         Iterable<Product> result = this.productRepository.findAll(predicate);

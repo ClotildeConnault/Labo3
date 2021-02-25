@@ -8,7 +8,7 @@ import be.technifutur.labo3.service.UserService;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
+import java.time.*;
 import java.util.Arrays;
 import java.util.List;
 
@@ -51,27 +51,33 @@ public class DataInit implements InitializingBean {
     private List<Product> products = Arrays.asList(
             Product.builder()
                     .name("yaourt")
+                    .description("Ceci est un yaourt")
+                    .expirationDate(Instant.ofEpochSecond(LocalDateTime.of(2021,02,25,0,1).toEpochSecond(ZoneOffset.ofHours(0))))
                     .TVA(6d)
                     .insertDate(Instant.now())
-                    .price(2d)
+                    .price(2.0)
                     .quantity(12)
                     .supplier(suppliers.get(0))
                     .categories(Arrays.asList(categories.get(0)))
                     .build(),
             Product.builder()
                     .name("Kit kat")
+                    .description("Ceci est un kit kat")
+                    .expirationDate(Instant.ofEpochSecond(LocalDateTime.of(2021,03,25,0,1).toEpochSecond(ZoneOffset.ofHours(0))))
                     .TVA(6d)
                     .insertDate(Instant.now())
-                    .price(2d)
+                    .price(2.5)
                     .quantity(20)
                     .supplier(suppliers.get(0))
                     .categories(Arrays.asList(categories.get(0)))
                     .build(),
             Product.builder()
                     .name("Crème au chocolat")
+                    .description("Ceci est une crème au chocolat")
+                    .expirationDate(Instant.ofEpochSecond(LocalDateTime.of(2021,04,25,0,1).toEpochSecond(ZoneOffset.ofHours(0))))
                     .TVA(6d)
                     .insertDate(Instant.now())
-                    .price(2d)
+                    .price(1.48)
                     .quantity(15)
                     .supplier(suppliers.get(0))
                     .categories(Arrays.asList(categories.get(0)))
