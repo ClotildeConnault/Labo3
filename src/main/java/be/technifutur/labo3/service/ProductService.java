@@ -84,6 +84,7 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
                 old.getSupplier()
         );
         product.setId(integer);
+        product.setInsertDate(toTest.getInsertDate());
         productRepository.save(product);
         return !toTest.equals(productRepository.getOne(integer));
     }

@@ -31,11 +31,9 @@ public class Product {
     @Column
     private String description;
 
-    @Column(nullable = false)
     @CreationTimestamp
     private Instant insertDate;
 
-    @Column
     @UpdateTimestamp
     private Instant updateDate;
 

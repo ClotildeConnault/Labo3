@@ -44,7 +44,8 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
     }
 
     @Override
-    public ResponseEntity<Boolean> delete(@PathVariable Integer integer) {
+    @DeleteMapping(path = "/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(service.delete(integer));
     }
 }
