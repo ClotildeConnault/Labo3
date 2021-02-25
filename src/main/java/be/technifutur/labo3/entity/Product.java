@@ -6,7 +6,10 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 import org.hibernate.annotations.CreationTimestamp;
+import org.hibernate.annotations.DynamicInsert;
 import org.hibernate.annotations.UpdateTimestamp;
+import org.springframework.beans.factory.annotation.Value;
+
 
 import javax.persistence.*;
 import java.time.Instant;
@@ -17,7 +20,7 @@ import java.util.List;
 @Builder
 @NoArgsConstructor
 @AllArgsConstructor
-
+@DynamicInsert
 public class Product {
 
     @Id
@@ -46,7 +49,7 @@ public class Product {
     @Column(nullable = false)
     private Integer quantity;
 
-    @Column
+    @Column(columnDefinition = "varchar(255) default 'https://www.kabylieclim.com/wp-content/uploads/2015/09/Pas-dimage-disponible.jpg;'")
     private String imagePath;
 
     @Column(nullable = false)
