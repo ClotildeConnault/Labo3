@@ -50,12 +50,12 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
         return ResponseEntity.ok(service.delete(integer));
     }
 
-    @GetMapping(path = "/searchByName")
+    @PostMapping(path = "/searchByName")
     public ResponseEntity<List<ProductDTO>> searchByName(@RequestBody String productName){
         return ResponseEntity.ok(service.searchByProductName(productName));
     }
 
-    @GetMapping(path = "/search")
+    @PostMapping(path = "/search")
     public ResponseEntity<List<ProductDTO>> search(@RequestBody Product product){
         return ResponseEntity.ok(service.searchByProduct(product));
     }
