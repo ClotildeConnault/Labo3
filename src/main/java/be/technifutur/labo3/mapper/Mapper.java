@@ -1,10 +1,7 @@
 package be.technifutur.labo3.mapper;
 
-import be.technifutur.labo3.dto.CategoryDTO;
-import be.technifutur.labo3.dto.ProductDTO;
-import be.technifutur.labo3.dto.SupplierDTO;
+import be.technifutur.labo3.dto.*;
 import be.technifutur.labo3.entity.*;
-import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.Product;
 import org.springframework.stereotype.Service;
 
@@ -105,6 +102,11 @@ public class Mapper {
                 .pseudo(user.getPseudo())
                 .password(user.getPassword())
                 .address(user.getAddress())
+                .orders(user.getOrders()
+                        .stream()
+                        .map(this::toOrderDTO)
+                        .collect(Collectors.toList())
+                )
                 .build();
     }
 
@@ -117,6 +119,43 @@ public class Mapper {
                 .pseudo(userDTO.getPseudo())
                 .password(userDTO.getPassword())
                 .address(userDTO.getAddress())
+                .orders(userDTO.getOrders()
+                        .stream()
+                        .map(this::toOrderEntity)
+                        .collect(Collectors.toList())
+                )
+                .build();
+    }
+
+    public OrderDTO toOrderDTO(Order order) {
+        return OrderDTO.builder()
+                .id(order.getId())
+                .reference(order.getReference())
+                .creationDate(order.getCreationDate())
+                .products(order.getProducts()
+                        .stream()
+                        .map(this::toProductDTO)
+                        .collect(Collectors.toList())
+                )
+                .isPaid(order.isPaid())
+                .paymentMethod(order.getPaymentMethod())
+                .user(toUserDTO(order.getUser()))
+                .build();
+    }
+
+    public Order toOrderEntity(OrderDTO order) {
+        return Order.builder()
+                .id(order.getId())
+                .reference(order.getReference())
+                .creationDate(order.getCreationDate())
+                .products(order.getProducts()
+                        .stream()
+                        .map(this::toProductEntity)
+                        .collect(Collectors.toList())
+                )
+                .isPaid(order.isPaid())
+                .paymentMethod(order.getPaymentMethod())
+                .user(toUserEntity(order.getUser()))
                 .build();
     }
 

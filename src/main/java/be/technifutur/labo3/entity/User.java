@@ -4,6 +4,7 @@ import lombok.*;
 import lombok.experimental.FieldDefaults;
 
 import javax.persistence.*;
+import java.util.List;
 
 @Data
 @AllArgsConstructor
@@ -35,5 +36,8 @@ public class User {
 
     @Embedded
     Address address;
+
+    @OneToMany(mappedBy = "products")
+    List<Order> orders;
 
 }

@@ -51,7 +51,8 @@ public class  UserService implements Crudable<User, UserDTO, Integer> {
                 oldUser.getAccessLevel(),
                 oldUser.getPseudo(),
                 oldUser.getPassword(),
-                oldUser.getAddress()
+                oldUser.getAddress(),
+                oldUser.getOrders()
         );
         user.setId(integer);
         this.userRepository.save(user);
