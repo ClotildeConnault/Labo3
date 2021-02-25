@@ -3,14 +3,17 @@ package be.technifutur.labo3.service;
 import be.technifutur.labo3.dto.ProductDTO;
 import be.technifutur.labo3.entity.Category;
 import be.technifutur.labo3.entity.Product;
+import be.technifutur.labo3.entity.QProduct;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.ProductRepository;
+import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
 import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
+import java.util.stream.StreamSupport;
 
 @Service
 public class ProductService implements Crudable<Product, ProductDTO, Integer> {
@@ -93,5 +96,22 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
     public boolean delete(Integer integer) {
         productRepository.deleteById(integer);
         return !productRepository.existsById(integer);
+    }
+
+    public List<ProductDTO> searchByProductName(String productName){
+
+        BooleanBuilder predicate = new BooleanBuilder();
+
+        QProduct qProduct = QProduct.product;
+
+        if(productName != null && !productName.equals("")){
+            predicate.and(qProduct.name.containsIgnoreCase(productName));
+        }
+
+        Iterable<Product> result = this.productRepository.findAll(predicate);
+
+        return StreamSupport.stream(result.spliterator(),false)
+                .map(mapper::toProductDTO)
+                .collect(Collectors.toList());
     }
 }

@@ -48,4 +48,9 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(service.delete(integer));
     }
+
+    @GetMapping(path = "/search")
+    public ResponseEntity<List<ProductDTO>> searchByName(@RequestBody String productName){
+        return ResponseEntity.ok(service.searchByProductName(productName));
+    }
 }
