@@ -21,11 +21,15 @@ public class DataInit implements InitializingBean {
 
     private List<Category> categories = Arrays.asList(
             Category.builder()
-            .name("produits laitiers")
-            .build(),
+                    .name("Produits laitiers")
+                    .build(),
 
             Category.builder()
-                    .name("céréales")
+                    .name("Céréales")
+                    .build(),
+
+            Category.builder()
+                    .name("Friandises")
                     .build()
     );
 
@@ -48,7 +52,7 @@ public class DataInit implements InitializingBean {
 
     private List<Product> products = Arrays.asList(
             Product.builder()
-                    .name("yaourt")
+                    .name("Yaourt")
                     .description("Ceci est un yaourt")
                     .expirationDate(Instant.ofEpochSecond(LocalDateTime.of(2021,02,25,0,1).toEpochSecond(ZoneOffset.ofHours(0))))
                     .TVA(6d)
@@ -56,7 +60,7 @@ public class DataInit implements InitializingBean {
                     .price(2.0)
                     .quantity(12)
                     .imagePath("https://cdn-s-www.ledauphine.com/images/95A10B41-F408-4B27-8E65-2E89F04ECF54/NW_raw/illustration-1583764974.jpg")
-                    .supplier(suppliers.get(0))
+                    .supplier(suppliers.get(1))
                     .categories(Arrays.asList(categories.get(0)))
                     .build(),
             Product.builder()
@@ -68,7 +72,7 @@ public class DataInit implements InitializingBean {
                     .price(2.5)
                     .quantity(20)
                     .supplier(suppliers.get(0))
-                    .categories(Arrays.asList(categories.get(0)))
+                    .categories(Arrays.asList(categories.get(2)))
                     .build(),
             Product.builder()
                     .name("Crème au chocolat")
@@ -102,12 +106,39 @@ public class DataInit implements InitializingBean {
                     .password("CH83NCH")
                     .build(),
             User.builder()
-                    .firstName("Stephen")
+                    .firstName("Stephan")
                     .lastName("Carion")
                     .address(new Address("Rue du Grand Bleu",30,"4000","Liège","Belgique"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .pseudo("Steph")
                     .password("PL0NG33")
+                    .build()
+    );
+
+    private List<Order> orders = Arrays.asList(
+            Order.builder()
+                    .reference("ORD000001")
+                    .creationDate(Instant.now())
+                    .products(Arrays.asList(products.get(0), (products.get(1))))
+                    .isPaid(true)
+                    .paymentMethod(PaymentMethod.PAYPAL)
+                    .user(users.get(1))
+                    .build(),
+            Order.builder()
+                    .reference("ORD000002")
+                    .creationDate(Instant.now())
+                    .products(Arrays.asList(products.get(1), (products.get(2))))
+                    .isPaid(true)
+                    .paymentMethod(PaymentMethod.CASH)
+                    .user(users.get(2))
+                    .build(),
+            Order.builder()
+                    .reference("ORD000003")
+                    .creationDate(Instant.now())
+                    .products(Arrays.asList(products.get(0), (products.get(2))))
+                    .isPaid(true)
+                    .paymentMethod(PaymentMethod.CREDIT_CARD)
+                    .user(users.get(0))
                     .build()
     );
 
@@ -125,5 +156,6 @@ public class DataInit implements InitializingBean {
         suppliers.forEach(supplierService::insert);
         products.forEach(productService::insert);
         users.forEach(userService::insert);
+        orders.forEach(orderService::insert);
     }
 }
