@@ -35,7 +35,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
 
     @Override
     public ResponseEntity<Boolean> insert(Supplier supplier) {
-        return null;
+        return ResponseEntity.ok(this.supplierService.insert(supplier));
     }
 
     @Override
