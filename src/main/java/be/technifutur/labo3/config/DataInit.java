@@ -50,14 +50,32 @@ public class DataInit implements InitializingBean {
 
     private List<Product> products = Arrays.asList(
             Product.builder()
-            .name("yaourt")
-            .TVA(6d)
-            .insertDate(Instant.now())
-            .price(2d)
-            .quantity(12)
-            .supplier(suppliers.get(0))
-            .categories(Arrays.asList(categories.get(0)))
-            .build()
+                    .name("yaourt")
+                    .TVA(6d)
+                    .insertDate(Instant.now())
+                    .price(2d)
+                    .quantity(12)
+                    .supplier(suppliers.get(0))
+                    .categories(Arrays.asList(categories.get(0)))
+                    .build(),
+            Product.builder()
+                    .name("Kit kat")
+                    .TVA(6d)
+                    .insertDate(Instant.now())
+                    .price(2d)
+                    .quantity(20)
+                    .supplier(suppliers.get(0))
+                    .categories(Arrays.asList(categories.get(0)))
+                    .build(),
+            Product.builder()
+                    .name("Crème au chocolat")
+                    .TVA(6d)
+                    .insertDate(Instant.now())
+                    .price(2d)
+                    .quantity(15)
+                    .supplier(suppliers.get(0))
+                    .categories(Arrays.asList(categories.get(0)))
+                    .build()
 
     );
 
