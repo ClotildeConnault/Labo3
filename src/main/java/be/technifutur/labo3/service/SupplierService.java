@@ -1,11 +1,14 @@
 package be.technifutur.labo3.service;
 
 import be.technifutur.labo3.dto.SupplierDTO;
+import be.technifutur.labo3.entity.Product;
+import be.technifutur.labo3.entity.SocialStatut;
 import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.SupplierRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.Arrays;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
