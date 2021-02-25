@@ -25,7 +25,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
     }
 
     @Override
-    @GetMapping (path = {"/{id}"})
+    @GetMapping (path = "/{id}")
     public ResponseEntity<SupplierDTO> getOne(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.supplierService.getById(integer));
     }
@@ -37,14 +37,16 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
     }
 
     @Override
-    @PutMapping
-    public ResponseEntity<Boolean> update(@RequestBody Supplier supplier, Integer integer) {
+    @PutMapping (path = "/{id}" )
+    public ResponseEntity<Boolean> update(@RequestBody Supplier supplier, @PathVariable Integer integer) {
         return ResponseEntity.ok(this.supplierService.update(supplier,integer));
     }
 
     @Override
-    @DeleteMapping
-    public ResponseEntity<Boolean> delete(Integer integer) {
+    @DeleteMapping (path = "/{id}")
+    public ResponseEntity<Boolean> delete(@PathVariable Integer integer) {
         return ResponseEntity.ok(this.supplierService.delete(integer));
     }
+
+
 }
