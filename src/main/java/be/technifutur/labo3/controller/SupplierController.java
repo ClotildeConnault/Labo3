@@ -28,7 +28,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
     }
 
     @Override
-    @GetMapping (path = {"/id"})
+    @GetMapping (path = {"/{id}"})
     public ResponseEntity<SupplierDTO> getOne(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.supplierService.getById(integer));
     }

@@ -27,7 +27,7 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
 
     @Override
     @GetMapping(path = "/{id}")
-    public ResponseEntity<ProductDTO> getOne(@PathVariable Integer integer) {
+    public ResponseEntity<ProductDTO> getOne(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(service.getById(integer));
     }
 
