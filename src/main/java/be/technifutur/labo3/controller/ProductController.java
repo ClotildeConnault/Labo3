@@ -9,7 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
-@CrossOrigin(origins = "http://localhost:8080")
+//@CrossOrigin(origins = "http://localhost:8080")
 @RestController
 @RequestMapping(path = "/products")
 public class ProductController implements RestControllable<Product, ProductDTO, Integer> {
@@ -21,6 +21,7 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
     }
 
     @Override
+    @CrossOrigin
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAll() {
         return ResponseEntity.ok(service.getAll());
