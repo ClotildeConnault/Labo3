@@ -1,10 +1,7 @@
 package be.technifutur.labo3.config;
 
 import be.technifutur.labo3.entity.*;
-import be.technifutur.labo3.service.CategoryService;
-import be.technifutur.labo3.service.ProductService;
-import be.technifutur.labo3.service.SupplierService;
-import be.technifutur.labo3.service.UserService;
+import be.technifutur.labo3.service.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +16,7 @@ public class DataInit implements InitializingBean {
     private final CategoryService categoryService;
     private final UserService userService;
     private final SupplierService supplierService;
+    private final OrderService orderService;
 
 
     private List<Category> categories = Arrays.asList(
@@ -86,11 +84,39 @@ public class DataInit implements InitializingBean {
 
     );
 
-    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService) {
+    private List<User> users = Arrays.asList(
+            User.builder()
+                    .firstName("Clotilde")
+                    .lastName("Connault")
+                    .address(new Address("Rue du Faubourg Saint-Honoré",55,"75008","Paris 8e","France"))
+                    .accessLevel(AccessLevel.ADMINISTRATOR)
+                    .pseudo("Clo")
+                    .password("3LYS33")
+                    .build(),
+            User.builder()
+                    .firstName("Benjamin")
+                    .lastName("Valin")
+                    .address(new Address("Rue Gaston Grégoire",17,"4540","Amay","Belgique"))
+                    .accessLevel(AccessLevel.ADMINISTRATOR)
+                    .pseudo("Chbench")
+                    .password("CH83NCH")
+                    .build(),
+            User.builder()
+                    .firstName("Stephen")
+                    .lastName("Carion")
+                    .address(new Address("Rue du Grand Bleu",30,"4000","Liège","Belgique"))
+                    .accessLevel(AccessLevel.ADMINISTRATOR)
+                    .pseudo("Steph")
+                    .password("PL0NG33")
+                    .build()
+    );
+
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, OrderService orderService) {
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
         this.supplierService = supplierService;
+        this.orderService = orderService;
     }
 
     @Override
@@ -98,5 +124,6 @@ public class DataInit implements InitializingBean {
         categories.forEach(categoryService::insert);
         suppliers.forEach(supplierService::insert);
         products.forEach(productService::insert);
+        users.forEach(userService::insert);
     }
 }
