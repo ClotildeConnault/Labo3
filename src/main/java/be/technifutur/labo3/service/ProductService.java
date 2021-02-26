@@ -121,7 +121,7 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
         }
 
         // Les produits recherchés auront une quantité en stock supérieure ou égale à celle recherchée
-        if(product.getQuantity() >0){
+        if(product.getQuantity() != null && product.getQuantity() >0){
             predicate.and(qProduct.quantity.goe((product.getQuantity())));
         }
 
