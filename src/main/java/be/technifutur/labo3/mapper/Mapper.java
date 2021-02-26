@@ -43,6 +43,8 @@ public class Mapper {
                 .TVA(product.getTVA())
                 .supplier(product.getSupplier() != null? toSupplierDTO(product.getSupplier()) : null)
                 .inactive(product.isInactive())
+                .tva(product.getTva())
+                .supplier(toSupplierDTO(product.getSupplier()))
                 .build();
 
         System.out.println(dto.isInactive());
@@ -64,7 +66,7 @@ public class Mapper {
                 .quantity(product.getQuantity())
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
-                .TVA(product.getTVA())
+                .tva(product.getTva())
                 .supplier(toSupplierEntity(product.getSupplier()))
                 .inactive(product.isInactive())
                 .build();
