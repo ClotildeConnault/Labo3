@@ -25,7 +25,7 @@ public class Mapper {
     }
 
     public ProductDTO toProductDTO(Product product) {
-        return ProductDTO.builder()
+         ProductDTO dto = ProductDTO.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .categories(product.getCategories()
@@ -41,12 +41,16 @@ public class Mapper {
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
                 .TVA(product.getTVA())
-                .supplier(toSupplierDTO(product.getSupplier()))
+                .supplier(product.getSupplier() != null? toSupplierDTO(product.getSupplier()) : null)
+                .inactive(product.isInactive())
                 .build();
+
+        System.out.println(dto.isInactive());
+        return dto;
     }
 
     public Product toProductEntity(ProductDTO product) {
-        return Product.builder()
+        Product productTest = Product.builder()
                 .id(product.getId())
                 .name(product.getName())
                 .categories(product.getCategories()
@@ -62,7 +66,11 @@ public class Mapper {
                 .insertDate(product.getInsertDate())
                 .TVA(product.getTVA())
                 .supplier(toSupplierEntity(product.getSupplier()))
+                .inactive(product.isInactive())
                 .build();
+
+        System.out.println(productTest.isInactive());
+        return productTest;
     }
 
     public SupplierDTO toSupplierDTO(Supplier supplier) {

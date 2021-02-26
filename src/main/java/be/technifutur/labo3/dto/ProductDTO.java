@@ -41,4 +41,6 @@ public class ProductDTO {
     private List<CategoryDTO> categories;
 
     private SupplierDTO supplier;
+
+    private boolean inactive;
 }

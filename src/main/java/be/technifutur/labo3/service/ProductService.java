@@ -1,17 +1,15 @@
 package be.technifutur.labo3.service;
 
-import be.technifutur.labo3.dto.CategoryDTO;
 import be.technifutur.labo3.dto.ProductDTO;
-import be.technifutur.labo3.dto.SupplierDTO;
-import be.technifutur.labo3.entity.Category;
 import be.technifutur.labo3.entity.Product;
 import be.technifutur.labo3.entity.QProduct;
+import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.ProductRepository;
+import be.technifutur.labo3.repository.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
 import org.springframework.stereotype.Service;
 
-import java.time.Instant;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -21,10 +19,12 @@ import java.util.stream.StreamSupport;
 public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     private final ProductRepository productRepository;
+    private final SupplierRepository supplierRepository;
     private final Mapper mapper;
 
-    public ProductService(ProductRepository productRepository, Mapper mapper) {
+    public ProductService(ProductRepository productRepository, SupplierRepository supplierRepository, Mapper mapper) {
         this.productRepository = productRepository;
+        this.supplierRepository = supplierRepository;
         this.mapper = mapper;
     }
 
@@ -66,7 +66,8 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
                 old.getImagePath(),
                 old.getTVA(),
                 old.getCategories(),
-                old.getSupplier()
+                old.getSupplier(),
+                old.isInactive()
         );
         product.setId(integer);
         product.setInsertDate(toTest.getInsertDate());
@@ -76,8 +77,12 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     @Override
     public boolean delete(Integer integer) {
-        productRepository.deleteById(integer);
-        return !productRepository.existsById(integer);
+        Product toDelete = productRepository.getOne(integer);
+        toDelete.setInactive(true);
+        productRepository.save(toDelete);
+        Product product = productRepository.getOne(integer);
+        System.out.println("TEST" + product.isInactive());
+        return product.isInactive();
     }
 
     public List<ProductDTO> searchByProductName(String productName){
