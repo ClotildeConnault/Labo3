@@ -26,13 +26,13 @@ public class SupplierService  implements Crudable<Supplier, SupplierDTO, Integer
 
     @Override
     public List<SupplierDTO> getAll() {
-        return this.supplierRepository.findAll().stream().map(mapper::toSupplierDTO).collect(Collectors.toList());
+        return this.supplierRepository.findAll().stream().map(s -> mapper.toSupplierDTO(s, true)).collect(Collectors.toList());
     }
 
     @Override
     public SupplierDTO getById(Integer integer) {
         Supplier supplier = this.supplierRepository.findById(integer).orElseThrow(() -> new NoSuchElementException("Pas de fournisseur avec l'id " + integer));
-        return mapper.toSupplierDTO(supplier);
+        return mapper.toSupplierDTO(supplier, true);
     }
 
     @Override

@@ -98,6 +98,6 @@ public class DataInit implements InitializingBean {
         categories.forEach(categoryService::insert);
         suppliers.forEach(supplierService::insert);
         products.forEach(productService::insert);
-        products.forEach(p -> System.out.println(p.getImagePath()));
+        products.forEach(p -> System.out.println(p.getSupplier()));
     }
 }

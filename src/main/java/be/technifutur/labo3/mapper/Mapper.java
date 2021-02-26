@@ -44,6 +44,7 @@ public class Mapper {
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
                 .TVA(product.getTVA())
+                .supplier(toSupplierDTO(product.getSupplier()))
                 .build();
     }
 
@@ -63,10 +64,15 @@ public class Mapper {
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
                 .TVA(product.getTVA())
+                .supplier(toSupplierEntity(product.getSupplier()))
                 .build();
     }
 
-    public SupplierDTO toSupplierDTO (Supplier supplier){
+    public SupplierDTO toSupplierDTO(Supplier supplier) {
+        return toSupplierDTO(supplier, false);
+    }
+
+    public SupplierDTO toSupplierDTO (Supplier supplier, boolean withProducts){
         return SupplierDTO.builder()
                 .id(supplier.getId())
                 .companyName(supplier.getCompanyName())
@@ -74,10 +80,11 @@ public class Mapper {
                 .sector(supplier.getSector())
                 .insertionDate(supplier.getInsertionDate())
                 .updateDate(supplier.getUpdateDate())
-                .products(supplier.getProducts()
+                .products(withProducts? supplier.getProducts()
                                 .stream()
                                 .map(this::toProductDTO)
-                                .collect(Collectors.toList()))
+                                .collect(Collectors.toList())
+                : null)
                 .build();
     }
 
