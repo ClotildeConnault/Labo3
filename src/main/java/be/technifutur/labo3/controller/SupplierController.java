@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin
 @RestController
 @RequestMapping(path = "/suppliers")
 public class SupplierController implements RestControllable<Supplier, SupplierDTO, Integer> {
