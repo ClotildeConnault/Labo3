@@ -53,7 +53,7 @@ public class Product {
     private String imagePath;
 
     @Column(nullable = false)
-    private double TVA;
+    private double tva;
 
     @ManyToMany
     private List<Category> categories;

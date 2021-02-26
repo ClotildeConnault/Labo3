@@ -40,7 +40,7 @@ public class Mapper {
                 .quantity(product.getQuantity())
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
-                .TVA(product.getTVA())
+                .tva(product.getTva())
                 .supplier(toSupplierDTO(product.getSupplier()))
                 .build();
     }
@@ -60,7 +60,7 @@ public class Mapper {
                 .quantity(product.getQuantity())
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
-                .TVA(product.getTVA())
+                .tva(product.getTva())
                 .supplier(toSupplierEntity(product.getSupplier()))
                 .build();
     }

@@ -64,7 +64,7 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
                 old.getPrice(),
                 old.getQuantity(),
                 old.getImagePath(),
-                old.getTVA(),
+                old.getTva(),
                 old.getCategories(),
                 old.getSupplier()
         );

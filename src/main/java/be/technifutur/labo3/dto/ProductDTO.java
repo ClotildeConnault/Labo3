@@ -36,7 +36,7 @@ public class ProductDTO {
 
     private String imagePath;
 
-    private double TVA;
+    private double tva;
 
     private List<CategoryDTO> categories;
 
