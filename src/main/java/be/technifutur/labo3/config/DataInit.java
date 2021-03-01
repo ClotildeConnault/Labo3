@@ -5,9 +5,15 @@ import be.technifutur.labo3.service.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
-import java.time.*;
+import java.io.File;
+import java.io.FileNotFoundException;
+import java.time.Instant;
+import java.time.LocalDateTime;
+import java.time.ZoneOffset;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
+import java.util.Scanner;
 
 @Service
 public class DataInit implements InitializingBean {
@@ -50,7 +56,7 @@ public class DataInit implements InitializingBean {
 
     );
 
-    private List<Product> products = Arrays.asList(
+    /*private List<Product> products = Arrays.asList(
             Product.builder()
                     .name("Yaourt")
                     .description("Ceci est un yaourt")
@@ -86,7 +92,45 @@ public class DataInit implements InitializingBean {
                     .categories(Arrays.asList(categories.get(0)))
                     .build()
 
-    );
+    );*/
+
+    List<Product> products = new ArrayList<>();
+    {
+        Scanner sc = new Scanner(new File("src/dataProduct.csv"));
+
+        while(sc.hasNext()){
+            String line = sc.nextLine();
+            String[] element = concatProductName(line.split(","));
+            products.add(Product.builder()
+                    .name(element[0])
+                    .description("This is a " + element[0])
+                    .expirationDate(Instant.ofEpochSecond(Long.parseLong(element[1])))
+                    .tva(Double.parseDouble(element[2]))
+                    .price(Double.parseDouble(element[3]))
+                    .quantity(Integer.parseInt(element[4]))
+                    .supplier(suppliers.get(0))
+                    .categories(Arrays.asList(categories.get(0)))
+                    .build());
+        }
+    }
+
+    public String[] concatProductName (String[] element){
+        String[] ret = new String[5];
+
+        ret[0]= element[0];
+        for(int i=1; i<= element.length-5;i++){
+            ret[0] += "," + element[i];
+        }
+        ret[1] = element[element.length-4];
+        ret[2] = element[element.length-3];
+        ret[3] = element[element.length-2];
+        ret[4] = element[element.length-1];
+
+        return ret;
+    }
+
+
+
 
     private List<User> users = Arrays.asList(
             User.builder()
@@ -142,7 +186,7 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
-    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, OrderService orderService) {
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, OrderService orderService) throws FileNotFoundException {
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
