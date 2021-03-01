@@ -64,4 +64,15 @@ public class  UserService implements Crudable<User, UserDTO, Integer> {
         this.userRepository.deleteById(integer);
         return this.userRepository.findById(integer).isEmpty();
     }
+
+    public boolean auth(UserDTO user) {
+        List<UserDTO> users = getAll();
+        users.forEach(u -> {
+            System.out.println(u.getPseudo());
+            System.out.println(u.getPassword());
+        });
+        return users.stream()
+                .anyMatch(u -> u.getPseudo().equals(user.getPseudo()) && u.getPassword().equals(user.getPassword()));
+
+    }
 }

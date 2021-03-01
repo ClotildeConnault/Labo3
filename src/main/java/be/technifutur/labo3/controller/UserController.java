@@ -48,4 +48,9 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.userService.delete(integer));
     }
+
+    @PostMapping(path = "/auth")
+    public ResponseEntity<Boolean> auth(@RequestBody UserDTO user) {
+        return ResponseEntity.ok(this.userService.auth(user));
+    }
 }
