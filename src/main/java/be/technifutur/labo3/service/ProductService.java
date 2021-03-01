@@ -143,12 +143,12 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     public Page<ProductDTO> getAllWithPagination(int page, int size){
 
-        Pageable paging = PageRequest.of(page, size);
+        long total = this.productRepository.findAll().stream().count();
 
         List<ProductDTO> result = this.productRepository.findAll(PageRequest.of(page, size))
                 .stream()
                 .map(mapper::toProductDTO)
                 .collect(Collectors.toList());
-        return new PageImpl<>(result, PageRequest.of(page, size), result.size());
+        return new PageImpl<>(result, PageRequest.of(page, size), total);
     }
 }
