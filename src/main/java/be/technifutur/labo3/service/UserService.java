@@ -6,6 +6,7 @@ import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.UserRepository;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
@@ -65,14 +66,27 @@ public class  UserService implements Crudable<User, UserDTO, Integer> {
         return this.userRepository.findById(integer).isEmpty();
     }
 
-    public boolean auth(UserDTO user) {
+    public User auth(UserDTO user) {
+
+        User userToReturn = null;
+
         List<UserDTO> users = getAll();
         users.forEach(u -> {
             System.out.println(u.getPseudo());
             System.out.println(u.getPassword());
         });
-        return users.stream()
+
+        boolean isPresent = users.stream()
                 .anyMatch(u -> u.getPseudo().equals(user.getPseudo()) && u.getPassword().equals(user.getPassword()));
 
+        if (isPresent) {
+           userToReturn = users.stream()
+                    .filter(u -> u.getPseudo().equals(user.getPseudo()) && u.getPassword().equals(user.getPassword()))
+                    .map(mapper::toUserEntity)
+                    .findFirst().orElseThrow(NoSuchElementException::new);
+            return userToReturn;
+        }
+
+        return null;
     }
 }

@@ -50,7 +50,7 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
     }
 
     @PostMapping(path = "/auth")
-    public ResponseEntity<Boolean> auth(@RequestBody UserDTO user) {
+    public ResponseEntity<User> auth(@RequestBody UserDTO user) {
         return ResponseEntity.ok(this.userService.auth(user));
     }
 }
