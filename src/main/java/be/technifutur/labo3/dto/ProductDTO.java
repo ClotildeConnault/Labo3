@@ -1,6 +1,7 @@
 package be.technifutur.labo3.dto;
 
 import be.technifutur.labo3.entity.Category;
+import com.opencsv.bean.CsvBindByName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;

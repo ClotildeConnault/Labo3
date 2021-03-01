@@ -1,5 +1,6 @@
 package be.technifutur.labo3.entity;
 
+import com.opencsv.bean.CsvBindByName;
 import com.sun.istack.Nullable;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -64,5 +65,6 @@ public class Product {
 
     @Column
     private boolean inactive;
+
 
 }
