@@ -40,7 +40,7 @@ public class Mapper {
                 .quantity(product.getQuantity())
                 .updateDate(product.getUpdateDate())
                 .insertDate(product.getInsertDate())
-                .TVA(product.getTVA())
+                .tva(product.getTva())
                 .supplier(product.getSupplier() != null? toSupplierDTO(product.getSupplier()) : null)
                 .inactive(product.isInactive())
                 .tva(product.getTva())
