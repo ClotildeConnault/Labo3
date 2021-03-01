@@ -3,6 +3,7 @@ package be.technifutur.labo3.controller;
 import be.technifutur.labo3.dto.ProductDTO;
 import be.technifutur.labo3.entity.Product;
 import be.technifutur.labo3.service.ProductService;
+import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -24,6 +25,11 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
     @GetMapping
     public ResponseEntity<List<ProductDTO>> getAll() {
         return ResponseEntity.ok(service.getAll());
+    }
+
+    @GetMapping(params = {"page", "size"})
+    public ResponseEntity<Page<ProductDTO>> getAllWithPagination(@RequestParam("page") int page, @RequestParam("size") int size){
+        return ResponseEntity.ok((this.service.getAllWithPagination(page,size)));
     }
 
     @Override

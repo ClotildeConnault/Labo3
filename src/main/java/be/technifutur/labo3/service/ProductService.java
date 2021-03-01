@@ -8,6 +8,10 @@ import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.ProductRepository;
 import be.technifutur.labo3.repository.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageImpl;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -135,5 +139,16 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
         return StreamSupport.stream(result.spliterator(),false)
                 .map(mapper::toProductDTO)
                 .collect(Collectors.toList());
+    }
+
+    public Page<ProductDTO> getAllWithPagination(int page, int size){
+
+        long total = this.productRepository.findAll().stream().count();
+
+        List<ProductDTO> result = this.productRepository.findAll(PageRequest.of(page, size))
+                .stream()
+                .map(mapper::toProductDTO)
+                .collect(Collectors.toList());
+        return new PageImpl<>(result, PageRequest.of(page, size), total);
     }
 }
