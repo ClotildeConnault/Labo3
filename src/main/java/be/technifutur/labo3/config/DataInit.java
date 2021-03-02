@@ -106,6 +106,7 @@ public class DataInit implements InitializingBean {
                     .tva(Double.parseDouble(element[2]))
                     .price(Double.parseDouble(element[3]))
                     .quantity(Integer.parseInt(element[4]))
+                    .imagePath(element[5])
                     .supplier(suppliers.get(0))
                     .categories(Arrays.asList(categories.get(0)))
                     .build());
@@ -113,16 +114,17 @@ public class DataInit implements InitializingBean {
     }
 
     public String[] concatProductName (String[] element){
-        String[] ret = new String[5];
+        String[] ret = new String[6];
 
         ret[0]= element[0];
-        for(int i=1; i<= element.length-5;i++){
+        for(int i=1; i<= element.length-6;i++){
             ret[0] += "," + element[i];
         }
-        ret[1] = element[element.length-4];
-        ret[2] = element[element.length-3];
-        ret[3] = element[element.length-2];
-        ret[4] = element[element.length-1];
+        ret[1] = element[element.length-5];
+        ret[2] = element[element.length-4];
+        ret[3] = element[element.length-3];
+        ret[4] = element[element.length-2];
+        ret[5] = element[element.length-1];
 
         return ret;
     }
