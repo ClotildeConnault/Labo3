@@ -20,12 +20,12 @@ import java.util.List;
 @Builder
 public class SupplierDTO {
 
-
-    int id;
-    String companyName;
-    SocialStatut statut;
-    Sector sector;
-    Instant insertionDate;
-    Instant updateDate;
-    List<ProductDTO> products;
+    private int id;
+    private String companyName;
+    private SocialStatut statut;
+    private Sector sector;
+    private Instant insertionDate;
+    private Instant updateDate;
+    private List<ProductDTO> products;
+    private boolean inactive;
 }
