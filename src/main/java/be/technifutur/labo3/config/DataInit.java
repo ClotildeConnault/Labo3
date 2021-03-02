@@ -8,8 +8,6 @@ import org.springframework.stereotype.Service;
 import java.io.File;
 import java.io.FileNotFoundException;
 import java.time.Instant;
-import java.time.LocalDateTime;
-import java.time.ZoneOffset;
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -22,7 +20,7 @@ public class DataInit implements InitializingBean {
     private final CategoryService categoryService;
     private final UserService userService;
     private final SupplierService supplierService;
-    private final OrderService orderService;
+    private final PurchaseService purchaseService;
 
 
     private List<Category> categories = Arrays.asList(
@@ -159,16 +157,24 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
-    private List<Order> orders = Arrays.asList(
-            Order.builder()
+    private List<Purchase> purchases = Arrays.asList(
+            Purchase.builder()
                     .reference("ORD000001")
                     .creationDate(Instant.now())
                     .products(Arrays.asList(products.get(0), (products.get(1))))
                     .isPaid(true)
                     .paymentMethod(PaymentMethod.PAYPAL)
+                    .user(users.get(0))
+                    .build(),
+            Purchase.builder()
+                    .reference("ORD000004")
+                    .creationDate(Instant.now())
+                    .products(Arrays.asList(products.get(5), (products.get(20))))
+                    .isPaid(true)
+                    .paymentMethod(PaymentMethod.PAYPAL)
                     .user(users.get(1))
                     .build(),
-            Order.builder()
+            Purchase.builder()
                     .reference("ORD000002")
                     .creationDate(Instant.now())
                     .products(Arrays.asList(products.get(1), (products.get(2))))
@@ -176,7 +182,7 @@ public class DataInit implements InitializingBean {
                     .paymentMethod(PaymentMethod.CASH)
                     .user(users.get(2))
                     .build(),
-            Order.builder()
+            Purchase.builder()
                     .reference("ORD000003")
                     .creationDate(Instant.now())
                     .products(Arrays.asList(products.get(0), (products.get(2))))
@@ -186,12 +192,12 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
-    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, OrderService orderService) throws FileNotFoundException {
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService) throws FileNotFoundException {
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
         this.supplierService = supplierService;
-        this.orderService = orderService;
+        this.purchaseService = purchaseService;
     }
 
     @Override
@@ -201,7 +207,6 @@ public class DataInit implements InitializingBean {
         products.forEach(productService::insert);
 		products.forEach(p -> System.out.println(p.getImagePath()));
 		users.forEach(userService::insert);
-        orders.forEach(orderService::insert);
-        products.forEach(p -> System.out.println(p.getSupplier()));
+        purchases.forEach(purchaseService::insert);
     }
 }

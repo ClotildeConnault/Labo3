@@ -18,7 +18,7 @@ import java.util.List;
 @Builder
 @Table(name = "purchase")
 @Entity
-public class Order {
+public class Purchase {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

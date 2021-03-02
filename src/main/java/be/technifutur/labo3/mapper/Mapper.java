@@ -119,9 +119,9 @@ public class Mapper {
                 .pseudo(user.getPseudo())
                 .password(user.getPassword())
                 .address(user.getAddress())
-                .orders(user.getOrders()
+                .orders(user.getPurchases()
                         .stream()
-                        .map(this::toOrderDTO)
+                        .map(this::toPurchaseDTO)
                         .collect(Collectors.toList())
                 )
                 .build();
@@ -136,32 +136,32 @@ public class Mapper {
                 .pseudo(userDTO.getPseudo())
                 .password(userDTO.getPassword())
                 .address(userDTO.getAddress())
-                .orders(userDTO.getOrders()
+                .purchases(userDTO.getOrders()
                         .stream()
-                        .map(this::toOrderEntity)
+                        .map(this::toPurchaseEntity)
                         .collect(Collectors.toList())
                 )
                 .build();
     }
 
-    public OrderDTO toOrderDTO(Order order) {
-        return OrderDTO.builder()
-                .id(order.getId())
-                .reference(order.getReference())
-                .creationDate(order.getCreationDate())
-                .products(order.getProducts()
+    public PurchaseDTO toPurchaseDTO(Purchase purchase) {
+        return PurchaseDTO.builder()
+                .id(purchase.getId())
+                .reference(purchase.getReference())
+                .creationDate(purchase.getCreationDate())
+                .products(purchase.getProducts()
                         .stream()
                         .map(this::toProductDTO)
                         .collect(Collectors.toList())
                 )
-                .isPaid(order.isPaid())
-                .paymentMethod(order.getPaymentMethod())
-                .user(toUserDTO(order.getUser()))
+                .isPaid(purchase.isPaid())
+                .paymentMethod(purchase.getPaymentMethod())
+                .user(toUserDTO(purchase.getUser()))
                 .build();
     }
 
-    public Order toOrderEntity(OrderDTO order) {
-        return Order.builder()
+    public Purchase toPurchaseEntity(PurchaseDTO order) {
+        return Purchase.builder()
                 .id(order.getId())
                 .reference(order.getReference())
                 .creationDate(order.getCreationDate())

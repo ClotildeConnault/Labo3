@@ -13,7 +13,7 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class OrderDTO {
+public class PurchaseDTO {
     int id;
     String reference;
     Instant creationDate;

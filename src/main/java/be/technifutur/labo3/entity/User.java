@@ -38,6 +38,6 @@ public class User {
     Address address;
 
     @OneToMany(mappedBy = "products")
-    List<Order> orders;
+    List<Purchase> purchases;
 
 }
