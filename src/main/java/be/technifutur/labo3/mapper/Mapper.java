@@ -92,6 +92,7 @@ public class Mapper {
                                 .map(this::toProductDTO)
                                 .collect(Collectors.toList())
                 : null)
+                .inactive(supplier.isInactive())
                 .build();
     }
 
@@ -107,6 +108,7 @@ public class Mapper {
                         .stream()
                         .map(this::toProductEntity)
                         .collect(Collectors.toList()))
+                .inactive(dto.isInactive())
                 .build();
     }
 
