@@ -40,6 +40,7 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
     @Override
     @PutMapping(path = "/{id}")
     public ResponseEntity<Boolean> update(@RequestBody User user, @PathVariable("id") Integer integer) {
+
         return ResponseEntity.ok(this.userService.update(user, integer));
     }
 

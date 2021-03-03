@@ -43,7 +43,9 @@ public class  UserService implements Crudable<User, UserDTO, Integer> {
 
     @Override
     public boolean update(User user, Integer integer) {
+
         User oldUser = this.userRepository.getOne(integer);
+        System.out.println(oldUser.getFirstName());
         User userToTest = new User(
                 oldUser.getId(),
                 oldUser.getFirstName(),
@@ -54,6 +56,7 @@ public class  UserService implements Crudable<User, UserDTO, Integer> {
                 oldUser.getAddress(),
                 oldUser.getPurchases()
         );
+        System.out.println("Il repassera par là");
         user.setId(integer);
         this.userRepository.save(user);
         return !userToTest.equals(this.userRepository.getOne(integer));
