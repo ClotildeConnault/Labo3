@@ -1,6 +1,7 @@
 package be.technifutur.labo3.dto;
 
 import be.technifutur.labo3.entity.Category;
+import be.technifutur.labo3.entity.PurchaseProduct;
 import com.opencsv.bean.CsvBindByName;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -10,7 +11,10 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 
 @Data
@@ -44,4 +48,6 @@ public class ProductDTO {
     private SupplierDTO supplier;
 
     private boolean inactive;
+
+    private List<PurchaseProductDTO> purchaseProducts = new ArrayList<PurchaseProductDTO>();
 }

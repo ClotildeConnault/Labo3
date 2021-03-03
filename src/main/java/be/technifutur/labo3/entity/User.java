@@ -37,7 +37,7 @@ public class User {
     @Embedded
     Address address;
 
-    @OneToMany(mappedBy = "products")
+    @OneToMany(mappedBy = "user")
     List<Purchase> purchases;
 
 }

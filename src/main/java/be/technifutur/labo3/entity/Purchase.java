@@ -8,7 +8,10 @@ import org.hibernate.annotations.UpdateTimestamp;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Data
 @AllArgsConstructor
@@ -30,8 +33,8 @@ public class Purchase {
     @CreationTimestamp
     Instant creationDate;
 
-    @ManyToMany
-    List<Product> products;
+ /*   @ManyToMany
+    List<Product> products;*/
 
     @Column
     boolean isPaid;
@@ -41,4 +44,7 @@ public class Purchase {
 
     @ManyToOne
     User user;
+
+    @OneToMany(mappedBy = "product")
+    private List<PurchaseProduct> purchaseProducts = new ArrayList<PurchaseProduct>();
 }

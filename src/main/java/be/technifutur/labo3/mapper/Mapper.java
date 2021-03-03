@@ -151,9 +151,9 @@ public class Mapper {
                 .id(purchase.getId())
                 .reference(purchase.getReference())
                 .creationDate(purchase.getCreationDate())
-                .products(purchase.getProducts()
+                .purchaseProducts(purchase.getPurchaseProducts()
                         .stream()
-                        .map(this::toProductDTO)
+                        .map(this::toPurchaseProductDTO)
                         .collect(Collectors.toList())
                 )
                 .isPaid(purchase.isPaid())
@@ -162,19 +162,51 @@ public class Mapper {
                 .build();
     }
 
-    public Purchase toPurchaseEntity(PurchaseDTO order) {
+    public Purchase toPurchaseEntity(PurchaseDTO purchase) {
         return Purchase.builder()
-                .id(order.getId())
-                .reference(order.getReference())
-                .creationDate(order.getCreationDate())
-                .products(order.getProducts()
+                .id(purchase.getId())
+                .reference(purchase.getReference())
+                .creationDate(purchase.getCreationDate())
+                .purchaseProducts(purchase.getPurchaseProducts()
                         .stream()
-                        .map(this::toProductEntity)
+                        .map(this::toPurchaseProductEntity)
                         .collect(Collectors.toList())
                 )
-                .isPaid(order.isPaid())
-                .paymentMethod(order.getPaymentMethod())
-                .user(toUserEntity(order.getUser()))
+                .isPaid(purchase.isPaid())
+                .paymentMethod(purchase.getPaymentMethod())
+                .user(toUserEntity(purchase.getUser()))
+                .build();
+    }
+
+    public PurchaseProductDTO toPurchaseProductDTO(PurchaseProduct purchaseProduct) {
+        return PurchaseProductDTO.builder()
+                .id(toPurchaseProductPKDTO(purchaseProduct.getId()))
+                .product(toProductDTO(purchaseProduct.getProduct()))
+                .purchase(toPurchaseDTO(purchaseProduct.getPurchase()))
+                .quantity(purchaseProduct.getQuantity())
+                .build();
+    }
+
+    public PurchaseProduct toPurchaseProductEntity(PurchaseProductDTO purchaseProduct) {
+        return PurchaseProduct.builder()
+                .id(toPurchaseProductPKEntity(purchaseProduct.getId()))
+                .product(toProductEntity(purchaseProduct.getProduct()))
+                .purchase(toPurchaseEntity(purchaseProduct.getPurchase()))
+                .quantity(purchaseProduct.getQuantity())
+                .build();
+    }
+
+    public PurchaseProductPKDTO toPurchaseProductPKDTO(PurchaseProductPK purchaseProductPK) {
+        return PurchaseProductPKDTO.builder()
+                .product_id(purchaseProductPK.getProductId())
+                .purchase_id(purchaseProductPK.getPurchaseId())
+                .build();
+    }
+
+    public PurchaseProductPK toPurchaseProductPKEntity(PurchaseProductPKDTO purchaseProductPK) {
+        return PurchaseProductPK.builder()
+                .productId(purchaseProductPK.getProduct_id())
+                .purchaseId(purchaseProductPK.getPurchase_id())
                 .build();
     }
 

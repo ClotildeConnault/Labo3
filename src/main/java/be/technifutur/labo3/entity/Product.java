@@ -15,7 +15,10 @@ import org.springframework.beans.factory.annotation.Value;
 
 import javax.persistence.*;
 import java.time.Instant;
+import java.util.ArrayList;
+import java.util.HashSet;
 import java.util.List;
+import java.util.Set;
 
 @Entity
 @Data
@@ -65,6 +68,9 @@ public class Product {
 
     @Column
     private boolean inactive;
+
+    @OneToMany(mappedBy = "purchase")
+    private List<PurchaseProduct> purchaseProducts = new ArrayList<PurchaseProduct>();
 
 
 }

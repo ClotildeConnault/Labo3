@@ -1,6 +1,7 @@
 package be.technifutur.labo3.config;
 
 import be.technifutur.labo3.entity.*;
+import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.service.*;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
@@ -21,6 +22,8 @@ public class DataInit implements InitializingBean {
     private final UserService userService;
     private final SupplierService supplierService;
     private final PurchaseService purchaseService;
+    private final PurchaseProductService purchaseProductService;
+    private final Mapper mapper;
 
 
     private List<Category> categories = Arrays.asList(
@@ -159,11 +162,14 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
+
+
+
     private List<Purchase> purchases = Arrays.asList(
             Purchase.builder()
                     .reference("ORD000001")
                     .creationDate(Instant.now())
-                    .products(Arrays.asList(products.get(0), (products.get(1))))
+                    //.purchaseProducts(Arrays.asList(p.get(0)))
                     .isPaid(true)
                     .paymentMethod(PaymentMethod.PAYPAL)
                     .user(users.get(0))
@@ -171,7 +177,7 @@ public class DataInit implements InitializingBean {
             Purchase.builder()
                     .reference("ORD000004")
                     .creationDate(Instant.now())
-                    .products(Arrays.asList(products.get(5), (products.get(20))))
+                   // .products(Arrays.asList(products.get(5), (products.get(20))))
                     .isPaid(true)
                     .paymentMethod(PaymentMethod.PAYPAL)
                     .user(users.get(1))
@@ -179,7 +185,7 @@ public class DataInit implements InitializingBean {
             Purchase.builder()
                     .reference("ORD000002")
                     .creationDate(Instant.now())
-                    .products(Arrays.asList(products.get(1), (products.get(2))))
+                  //  .products(Arrays.asList(products.get(1), (products.get(2))))
                     .isPaid(true)
                     .paymentMethod(PaymentMethod.CASH)
                     .user(users.get(2))
@@ -187,19 +193,29 @@ public class DataInit implements InitializingBean {
             Purchase.builder()
                     .reference("ORD000003")
                     .creationDate(Instant.now())
-                    .products(Arrays.asList(products.get(0), (products.get(2))))
+                  //  .products(Arrays.asList(products.get(0), (products.get(2))))
                     .isPaid(true)
                     .paymentMethod(PaymentMethod.CREDIT_CARD)
                     .user(users.get(0))
                     .build()
     );
 
-    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService) throws FileNotFoundException {
+    private List<PurchaseProduct> p = Arrays.asList(
+            PurchaseProduct.builder()
+                    .quantity(6)
+                    .product(products.get(2))
+                    .purchase(purchases.get(0))
+                    .build()
+    );
+
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService, PurchaseProductService purchaseProductService, Mapper mapper) throws FileNotFoundException {
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
         this.supplierService = supplierService;
         this.purchaseService = purchaseService;
+        this.purchaseProductService = purchaseProductService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -210,5 +226,30 @@ public class DataInit implements InitializingBean {
 		products.forEach(p -> System.out.println(p.getImagePath()));
 		users.forEach(userService::insert);
         purchases.forEach(purchaseService::insert);
+
+        Product ppp = Product.builder()
+                .id(2000)
+                .name("Z")
+                .description("This is a Z")
+                .expirationDate(Instant.now())
+                .tva(12d)
+                .price(2.0)
+                .quantity(2)
+                .supplier(suppliers.get(0))
+                .categories(Arrays.asList(categories.get(0)))
+                .build();
+
+        Purchase testPur = mapper.toPurchaseEntity(purchaseService.getById(1));
+
+        PurchaseProduct test = PurchaseProduct.builder()
+                .quantity(6)
+                .product(ppp)
+                .purchase(testPur)
+                .build();
+
+        purchaseProductService.insert(test);
+        //p.forEach(purchaseProductService::insert);
+
+
     }
 }

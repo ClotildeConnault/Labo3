@@ -57,7 +57,7 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     @Override
     public boolean update(Product product, Integer integer) {
-        Product old = productRepository.getOne(integer);
+        /*Product old = productRepository.getOne(integer);
         Product toTest = new Product(
                 old.getId(),
                 old.getName(),
@@ -76,7 +76,8 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
         product.setId(integer);
         product.setInsertDate(toTest.getInsertDate());
         productRepository.save(product);
-        return !toTest.equals(productRepository.getOne(integer));
+        return !toTest.equals(productRepository.getOne(integer));*/
+        return false;
     }
 
     @Override

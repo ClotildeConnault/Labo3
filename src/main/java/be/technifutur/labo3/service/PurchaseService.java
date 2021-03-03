@@ -56,7 +56,7 @@ public class PurchaseService implements Crudable<Purchase, PurchaseDTO, Integer>
 
     @Override
     public boolean update(Purchase purchase, Integer integer) {
-        Purchase oldPurchase = this.purchaseRepository.getOne(integer);
+       /* Purchase oldPurchase = this.purchaseRepository.getOne(integer);
         Purchase purchaseToTest = new Purchase(
                 oldPurchase.getId(),
                 oldPurchase.getReference(),
@@ -68,7 +68,9 @@ public class PurchaseService implements Crudable<Purchase, PurchaseDTO, Integer>
         );
         purchase.setId(integer);
         this.purchaseRepository.save(purchase);
-        return !purchaseToTest.equals(this.purchaseRepository.getOne(integer));
+        return !purchaseToTest.equals(this.purchaseRepository.getOne(integer));*/
+
+        return false;
     }
 
     @Override
