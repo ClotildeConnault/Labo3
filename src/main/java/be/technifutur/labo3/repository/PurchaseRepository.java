@@ -8,6 +8,6 @@ import java.util.List;
 
 public interface PurchaseRepository extends JpaRepository<Purchase, Integer> {
 
-    @Query(value = "SELECT * FROM PURCHASE WHERE USER_ID = 1", nativeQuery = true)
+    @Query(value = "SELECT * FROM PURCHASE WHERE USER_ID = ?1", nativeQuery = true)
     List<Purchase> findAllByUserId(Integer id);
 }
