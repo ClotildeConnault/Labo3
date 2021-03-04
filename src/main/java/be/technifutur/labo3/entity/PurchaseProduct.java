@@ -18,6 +18,7 @@ public class PurchaseProduct {
     @EmbeddedId
     private PurchaseProductPK id;
 
+
     @ManyToOne
     @MapsId("productId")
     @JoinColumn(name = "PRODUCT_ID")

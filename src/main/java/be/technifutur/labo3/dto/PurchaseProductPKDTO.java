@@ -12,7 +12,7 @@ import javax.persistence.Column;
 @AllArgsConstructor
 @Builder
 public class PurchaseProductPKDTO {
-    private Integer purchase_id;
+    private Integer purchaseId;
 
-    private Integer product_id;
+    private Integer productId;
 }

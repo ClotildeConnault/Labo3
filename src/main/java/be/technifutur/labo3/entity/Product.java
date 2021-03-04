@@ -69,8 +69,8 @@ public class Product {
     @Column
     private boolean inactive;
 
-    @OneToMany(mappedBy = "purchase")
-    private List<PurchaseProduct> purchaseProducts = new ArrayList<PurchaseProduct>();
+   /* @OneToMany(mappedBy = "purchase")
+    private List<PurchaseProduct> purchaseProducts = new ArrayList<PurchaseProduct>();*/
 
 
 }

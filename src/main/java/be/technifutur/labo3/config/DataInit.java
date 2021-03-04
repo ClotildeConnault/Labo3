@@ -200,8 +200,14 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
+    private PurchaseProductPK pk = PurchaseProductPK.builder()
+            .productId(products.get(2).getId())
+            .purchaseId(purchases.get(0).getId())
+            .build();
+
     private List<PurchaseProduct> p = Arrays.asList(
             PurchaseProduct.builder()
+                    .id(pk)
                     .quantity(6)
                     .product(products.get(2))
                     .purchase(purchases.get(0))
@@ -226,8 +232,9 @@ public class DataInit implements InitializingBean {
 		products.forEach(p -> System.out.println(p.getImagePath()));
 		users.forEach(userService::insert);
         purchases.forEach(purchaseService::insert);
+        p.forEach(purchaseProductService::insert);
 
-        Product ppp = Product.builder()
+    /*    Product ppp = Product.builder()
                 .id(2000)
                 .name("Z")
                 .description("This is a Z")
@@ -247,7 +254,7 @@ public class DataInit implements InitializingBean {
                 .purchase(testPur)
                 .build();
 
-        purchaseProductService.insert(test);
+        purchaseProductService.insert(test);*/
         //p.forEach(purchaseProductService::insert);
 
 

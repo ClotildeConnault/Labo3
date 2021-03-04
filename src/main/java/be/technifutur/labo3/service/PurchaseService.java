@@ -3,6 +3,7 @@ package be.technifutur.labo3.service;
 import be.technifutur.labo3.dto.PurchaseDTO;
 import be.technifutur.labo3.entity.Purchase;
 import be.technifutur.labo3.mapper.Mapper;
+import be.technifutur.labo3.repository.PurchaseProductRepository;
 import be.technifutur.labo3.repository.PurchaseRepository;
 import org.springframework.stereotype.Service;
 
@@ -15,14 +16,18 @@ public class PurchaseService implements Crudable<Purchase, PurchaseDTO, Integer>
 
     private final PurchaseRepository purchaseRepository;
     private final Mapper mapper;
+    private final PurchaseProductRepository purchaseProductRepository;
 
-    public PurchaseService(PurchaseRepository purchaseRepository, Mapper mapper) {
+    public PurchaseService(PurchaseRepository purchaseRepository, Mapper mapper, PurchaseProductRepository purchaseProductRepository) {
         this.purchaseRepository = purchaseRepository;
         this.mapper = mapper;
+        this.purchaseProductRepository = purchaseProductRepository;
     }
 
     @Override
     public List<PurchaseDTO> getAll() {
+        System.out.println("purchase service getALL début");
+
         return purchaseRepository.findAll()
                 .stream()
                 .map(mapper::toPurchaseDTO)

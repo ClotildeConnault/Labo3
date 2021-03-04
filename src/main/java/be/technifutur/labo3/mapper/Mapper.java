@@ -147,7 +147,9 @@ public class Mapper {
     }
 
     public PurchaseDTO toPurchaseDTO(Purchase purchase) {
-        return PurchaseDTO.builder()
+        System.out.println("mapper toPurchaseDTO début");
+
+        PurchaseDTO dto = PurchaseDTO.builder()
                 .id(purchase.getId())
                 .reference(purchase.getReference())
                 .creationDate(purchase.getCreationDate())
@@ -160,6 +162,8 @@ public class Mapper {
                 .paymentMethod(purchase.getPaymentMethod())
                 .user(toUserDTO(purchase.getUser()))
                 .build();
+
+        return dto;
     }
 
     public Purchase toPurchaseEntity(PurchaseDTO purchase) {
@@ -179,8 +183,10 @@ public class Mapper {
     }
 
     public PurchaseProductDTO toPurchaseProductDTO(PurchaseProduct purchaseProduct) {
+        System.out.println("mapper toPurchaseProductDTO début");
+
         return PurchaseProductDTO.builder()
-                .id(toPurchaseProductPKDTO(purchaseProduct.getId()))
+                //.id(toPurchaseProductPKDTO(purchaseProduct.getId()))
                 .product(toProductDTO(purchaseProduct.getProduct()))
                 .purchase(toPurchaseDTO(purchaseProduct.getPurchase()))
                 .quantity(purchaseProduct.getQuantity())
@@ -189,7 +195,7 @@ public class Mapper {
 
     public PurchaseProduct toPurchaseProductEntity(PurchaseProductDTO purchaseProduct) {
         return PurchaseProduct.builder()
-                .id(toPurchaseProductPKEntity(purchaseProduct.getId()))
+                //.id(toPurchaseProductPKEntity(purchaseProduct.getId()))
                 .product(toProductEntity(purchaseProduct.getProduct()))
                 .purchase(toPurchaseEntity(purchaseProduct.getPurchase()))
                 .quantity(purchaseProduct.getQuantity())
@@ -198,15 +204,15 @@ public class Mapper {
 
     public PurchaseProductPKDTO toPurchaseProductPKDTO(PurchaseProductPK purchaseProductPK) {
         return PurchaseProductPKDTO.builder()
-                .product_id(purchaseProductPK.getProductId())
-                .purchase_id(purchaseProductPK.getPurchaseId())
+                .productId(purchaseProductPK.getProductId())
+                .purchaseId(purchaseProductPK.getPurchaseId())
                 .build();
     }
 
     public PurchaseProductPK toPurchaseProductPKEntity(PurchaseProductPKDTO purchaseProductPK) {
         return PurchaseProductPK.builder()
-                .productId(purchaseProductPK.getProduct_id())
-                .purchaseId(purchaseProductPK.getPurchase_id())
+                .productId(purchaseProductPK.getProductId())
+                .purchaseId(purchaseProductPK.getPurchaseId())
                 .build();
     }
 

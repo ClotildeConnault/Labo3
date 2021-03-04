@@ -39,6 +39,7 @@ public class PurchaseController implements RestControllable<Purchase, PurchaseDT
     @Override
     @PostMapping
     public ResponseEntity<Boolean> insert(@RequestBody Purchase purchase) {
+        System.out.println("purchaseController");
         return ResponseEntity.ok(purchaseService.insert(purchase));
     }
 
