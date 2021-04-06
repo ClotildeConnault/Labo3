@@ -131,9 +131,6 @@ public class DataInit implements InitializingBean {
         return ret;
     }
 
-
-
-
     private List<User> users = Arrays.asList(
             User.builder()
                     .firstName("Clotilde")
@@ -142,7 +139,6 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Clo")
                     .password("1234")
-
                     .build(),
             User.builder()
                     .firstName("Benjamin")
@@ -151,7 +147,6 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Chbench")
                     .password("1234")
-
                     .build(),
             User.builder()
                     .firstName("Stephan")
@@ -160,7 +155,6 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Steph")
                     .password("1234")
-
                     .build()
     );
 
