@@ -19,7 +19,7 @@ public class UserDTO {
     String firstName;
     String lastName;
     AccessLevel accessLevel;
-    String pseudo;
+    String username;
     String password;
     Address address;
     List<PurchaseDTO> orders;

@@ -86,16 +86,16 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
 
         List<UserDTO> users = getAll();
         users.forEach(u -> {
-            System.out.println(u.getPseudo());
+            System.out.println(u.getUsername());
             System.out.println(u.getPassword());
         });
 
         boolean isPresent = users.stream()
-                .anyMatch(u -> u.getPseudo().equals(user.getPseudo()) && u.getPassword().equals(user.getPassword()));
+                .anyMatch(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()));
 
         if (isPresent) {
            userToReturn = users.stream()
-                    .filter(u -> u.getPseudo().equals(user.getPseudo()) && u.getPassword().equals(user.getPassword()))
+                    .filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()))
                     .map(mapper::toUserEntity)
                     .findFirst().orElseThrow(NoSuchElementException::new);
             return userToReturn;
