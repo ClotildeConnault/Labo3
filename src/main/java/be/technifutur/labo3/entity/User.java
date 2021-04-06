@@ -49,9 +49,9 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-//        SimpleGrantedAuthority role = new SimpleGrantedAuthority(accessLevel.name());
+        SimpleGrantedAuthority role = new SimpleGrantedAuthority(accessLevel.name());
         List<SimpleGrantedAuthority> roles = new ArrayList<>();
-//        roles.add(role);
+        roles.add(role);
         System.out.println("Les rôles : " + roles);
         return roles;
     }

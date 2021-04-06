@@ -4,6 +4,7 @@ import be.technifutur.labo3.dto.SupplierDTO;
 import be.technifutur.labo3.entity.Supplier;
 import be.technifutur.labo3.service.SupplierService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<List<SupplierDTO>> getAll() {
         return ResponseEntity.ok(this.supplierService.getAll());
     }
