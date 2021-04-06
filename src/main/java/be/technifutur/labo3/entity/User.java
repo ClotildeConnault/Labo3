@@ -30,6 +30,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     String lastName;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     AccessLevel accessLevel;
 
@@ -47,7 +48,7 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority role = new SimpleGrantedAuthority(accessLevel.toString());
+        SimpleGrantedAuthority role = new SimpleGrantedAuthority(accessLevel.name());
         return Arrays.asList(role);
     }
 

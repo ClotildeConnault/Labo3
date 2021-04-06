@@ -55,10 +55,11 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // Toujours mettre en priorité les requêtes spécialisées, et après, les requêtes générales
-                .antMatchers(HttpMethod.PUT, "/products").hasRole("ADMIN") /*Seul un admin peut faire des requêtes PUT*/
-                .antMatchers("/basket/**").authenticated()    /*Accès autorisé si connexion*/
-                .antMatchers(HttpMethod.GET,"/products/**").permitAll()
-                .anyRequest().authenticated()
+//                .antMatchers(HttpMethod.PUT, "/products").hasRole("ADMINISTRATOR") /*Seul un admin peut faire des requêtes PUT*/
+//                .antMatchers("/basket/**").authenticated()    /*Accès autorisé si connexion*/
+//                .antMatchers(HttpMethod.GET,"/products/**").permitAll()
+//                .anyRequest().authenticated()
+                .anyRequest().permitAll()
                 .and()
                 .exceptionHandling()    //Gestionnaire des exceptions liées à la sécurité
                 .and()
@@ -68,6 +69,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 // Gestion du token JWT
                 .addFilter(new JwtAuthenticationFilter(authenticationManager()))
                 .addFilter(new JwtAuthorizationFilter(authenticationManager(), service))
-                .cors();
+                .cors()
+                .and()
+                .headers().frameOptions().disable();
     }
 }
