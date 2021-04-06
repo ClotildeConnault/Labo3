@@ -138,7 +138,7 @@ public class DataInit implements InitializingBean {
                     .lastName("Connault")
                     .address(new Address("Rue du Faubourg Saint-Honoré",55,"75008","Paris 8e","France"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
-                    .pseudo("Clo")
+                    .username("Clo")
                     .password("3LYS33")
                     .build(),
             User.builder()
@@ -146,7 +146,7 @@ public class DataInit implements InitializingBean {
                     .lastName("Valin")
                     .address(new Address("Rue Gaston Grégoire",17,"4540","Amay","Belgique"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
-                    .pseudo("Chbench")
+                    .username("Chbench")
                     .password("CH83NCH")
                     .build(),
             User.builder()
@@ -154,7 +154,7 @@ public class DataInit implements InitializingBean {
                     .lastName("Carion")
                     .address(new Address("Rue du Grand Bleu",30,"4000","Liège","Belgique"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
-                    .pseudo("Steph")
+                    .username("Steph")
                     .password("PL0NG33")
                     .build()
     );
