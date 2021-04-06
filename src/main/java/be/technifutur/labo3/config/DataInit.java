@@ -140,6 +140,10 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Clo")
                     .password("3LYS33")
+                    .accountNonExpired(true)
+                    .accountNonLocked(true)
+                    .credentialsNonExpired(true)
+                    .enabled(true)
                     .build(),
             User.builder()
                     .firstName("Benjamin")
@@ -148,6 +152,10 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Chbench")
                     .password("CH83NCH")
+                    .accountNonExpired(true)
+                    .accountNonLocked(true)
+                    .credentialsNonExpired(true)
+                    .enabled(true)
                     .build(),
             User.builder()
                     .firstName("Stephan")
@@ -156,6 +164,10 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Steph")
                     .password("PL0NG33")
+                    .accountNonExpired(true)
+                    .accountNonLocked(true)
+                    .credentialsNonExpired(true)
+                    .enabled(true)
                     .build()
     );
 
