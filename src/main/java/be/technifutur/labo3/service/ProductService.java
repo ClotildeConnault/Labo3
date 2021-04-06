@@ -143,9 +143,11 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
 
     public Page<ProductDTO> getAllWithPagination(int page, int size){
 
-        long total = this.productRepository.findAll().stream().count();
+//        long total = this.productRepository.findAll().stream().count();
+        long total = this.productRepository.findByInactiveFalse().size();
 
-        List<ProductDTO> result = this.productRepository.findAll(PageRequest.of(page, size))
+//        List<ProductDTO> result = this.productRepository.findAll(PageRequest.of(page, size))
+        List<ProductDTO> result = this.productRepository.findByInactiveFalse(PageRequest.of(page, size))
                 .stream()
                 .map(mapper::toProductDTO)
                 .collect(Collectors.toList());

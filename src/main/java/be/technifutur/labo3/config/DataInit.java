@@ -131,21 +131,14 @@ public class DataInit implements InitializingBean {
         return ret;
     }
 
-
-
-
     private List<User> users = Arrays.asList(
             User.builder()
                     .firstName("Clotilde")
                     .lastName("Connault")
-                  //  .address(new Address("Rue du Faubourg Saint-Honoré",55,"75008","Paris 8e","France"))
+                    .address(new Address("Rue du Faubourg Saint-Honoré",55,"75008","Paris 8e","France"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Clo")
-                    .password("3LYS33")
-                  /*  .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)*/
+                    .password("1234")
                     .build(),
             User.builder()
                     .firstName("Benjamin")
@@ -153,11 +146,7 @@ public class DataInit implements InitializingBean {
                     .address(new Address("Rue Gaston Grégoire",17,"4540","Amay","Belgique"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Chbench")
-                    .password("CH83NCH")
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
+                    .password("1234")
                     .build(),
             User.builder()
                     .firstName("Stephan")
@@ -165,11 +154,7 @@ public class DataInit implements InitializingBean {
                     .address(new Address("Rue du Grand Bleu",30,"4000","Liège","Belgique"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Steph")
-                    .password("PL0NG33")
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
+                    .password("1234")
                     .build()
     );
 
@@ -220,9 +205,6 @@ public class DataInit implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
-
-   /*     ObjectMapper mapper = new ObjectMapper();
-        System.out.println(mapper.writeValueAsString(users.get(0)));*/
         categories.forEach(categoryService::insert);
         suppliers.forEach(supplierService::insert);
         products.forEach(productService::insert);
