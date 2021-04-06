@@ -2,6 +2,7 @@ package be.technifutur.labo3.controller;
 
 import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.User;
+import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.service.UserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.security.access.prepost.PreAuthorize;
@@ -15,9 +16,11 @@ import java.util.List;
 public class UserController implements RestControllable<User, UserDTO, Integer> {
 
     private final UserService userService;
+    private final Mapper mapper;
 
-    public UserController(UserService userService) {
+    public UserController(UserService userService, Mapper mapper) {
         this.userService = userService;
+        this.mapper = mapper;
     }
 
     @Override
@@ -56,4 +59,9 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
     public ResponseEntity<User> auth(@RequestBody UserDTO user) {
         return ResponseEntity.ok(this.userService.auth(user));
     }*/
+
+    @PostMapping(path = "/connected")
+    public ResponseEntity<UserDTO> getUserWithPseudo(@RequestBody User user) {
+        return ResponseEntity.ok(this.mapper.toUserDTO((User)this.userService.loadUserByUsername(user.getUsername())));
+    }
 }
