@@ -26,7 +26,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     @Override
     protected void doFilterInternal(HttpServletRequest request, HttpServletResponse response, FilterChain chain) throws IOException, ServletException {
-        String token = request.getHeader(JWTAuthenticationFilter.JWTConstants.HEADER_STRING);
+        String token = request.getHeader(JwtAuthenticationFilter.JwtConstants.HEADER_STRING);
 
         if (token != null && token.startsWith("Bearer ")) {
             UsernamePasswordAuthenticationToken authenticationToken = getAuthentication(token);
@@ -38,7 +38,7 @@ public class JwtAuthorizationFilter extends BasicAuthenticationFilter {
 
     // Récupération de l'utilisateur (via son username, inclus dans le payload du token)
     private UsernamePasswordAuthenticationToken getAuthentication(String token) {
-        String username = JWT.require(Algorithm.HMAC512(JWTAuthenticationFilter.JWTConstants.SECRET_KEY))
+        String username = JWT.require(Algorithm.HMAC512(JwtAuthenticationFilter.JwtConstants.SECRET_KEY))
                 .build()
                 .verify(token.replace("Bearer ", ""))
                 .getSubject()
