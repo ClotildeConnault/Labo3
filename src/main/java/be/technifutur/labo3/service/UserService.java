@@ -7,6 +7,7 @@ import be.technifutur.labo3.repository.UserRepository;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -18,10 +19,12 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
 
     private final UserRepository userRepository;
     private final Mapper mapper;
+    private final PasswordEncoder passwordEncoder;
 
-    public UserService(UserRepository userRepository, Mapper mapper) {
+    public UserService(UserRepository userRepository, Mapper mapper, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
         this.mapper = mapper;
+        this.passwordEncoder = passwordEncoder;
     }
 
     @Override
@@ -40,6 +43,8 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
 
     @Override
     public boolean insert(User user) {
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
+
         User newUser = this.userRepository.save(user);
         return this.userRepository.findById(newUser.getId()).isPresent();
     }
@@ -57,7 +62,11 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
                 oldUser.getUsername(),
                 oldUser.getPassword(),
                 oldUser.getAddress(),
-                oldUser.getPurchases()
+                oldUser.getPurchases(),
+                oldUser.isAccountNonExpired(),
+                oldUser.isAccountNonLocked(),
+                oldUser.isCredentialsNonExpired(),
+                oldUser.isEnabled()
         );
         System.out.println("Il repassera par là");
         user.setId(integer);

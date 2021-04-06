@@ -7,6 +7,7 @@ import org.springframework.security.core.authority.SimpleGrantedAuthority;
 import org.springframework.security.core.userdetails.UserDetails;
 
 import javax.persistence.*;
+import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.Collection;
 import java.util.List;
@@ -30,6 +31,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     String lastName;
 
+    @Enumerated(value = EnumType.STRING)
     @Column(nullable = false)
     AccessLevel accessLevel;
 
@@ -47,27 +49,38 @@ public class User implements UserDetails {
 
     @Override
     public Collection<? extends GrantedAuthority> getAuthorities() {
-        SimpleGrantedAuthority role = new SimpleGrantedAuthority(accessLevel.toString());
-        return Arrays.asList(role);
+//        SimpleGrantedAuthority role = new SimpleGrantedAuthority(accessLevel.name());
+        List<SimpleGrantedAuthority> roles = new ArrayList<>();
+//        roles.add(role);
+        System.out.println("Les rôles : " + roles);
+        return roles;
     }
+
+    boolean accountNonExpired = true;
+
+    boolean accountNonLocked = true;
+
+    boolean credentialsNonExpired = true;
+
+    boolean enabled = true;
 
     @Override
     public boolean isAccountNonExpired() {
-        return false;
+        return accountNonExpired;
     }
 
     @Override
     public boolean isAccountNonLocked() {
-        return false;
+        return accountNonLocked;
     }
 
     @Override
     public boolean isCredentialsNonExpired() {
-        return false;
+        return credentialsNonExpired;
     }
 
     @Override
     public boolean isEnabled() {
-        return false;
+        return enabled;
     }
 }
