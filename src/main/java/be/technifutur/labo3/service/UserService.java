@@ -44,8 +44,13 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
     @Override
     public boolean insert(User user) {
         user.setPassword(passwordEncoder.encode(user.getPassword()));
+        user.setCredentialsNonExpired(true);
+        user.setEnabled(true);
+        user.setAccountNonExpired(true);
+        user.setAccountNonLocked(true);
 
         User newUser = this.userRepository.save(user);
+        System.out.println("J'insère");
         return this.userRepository.findById(newUser.getId()).isPresent();
     }
 

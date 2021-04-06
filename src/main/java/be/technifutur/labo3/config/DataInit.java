@@ -2,6 +2,8 @@ package be.technifutur.labo3.config;
 
 import be.technifutur.labo3.entity.*;
 import be.technifutur.labo3.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -140,10 +142,7 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Clo")
                     .password("1234")
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
+
                     .build(),
             User.builder()
                     .firstName("Benjamin")
@@ -152,10 +151,7 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Chbench")
                     .password("1234")
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
+
                     .build(),
             User.builder()
                     .firstName("Stephan")
@@ -164,10 +160,7 @@ public class DataInit implements InitializingBean {
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Steph")
                     .password("1234")
-                    .accountNonExpired(true)
-                    .accountNonLocked(true)
-                    .credentialsNonExpired(true)
-                    .enabled(true)
+
                     .build()
     );
 
@@ -206,7 +199,9 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
-    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService) throws FileNotFoundException {
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService) throws FileNotFoundException, JsonProcessingException {
+
+
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
