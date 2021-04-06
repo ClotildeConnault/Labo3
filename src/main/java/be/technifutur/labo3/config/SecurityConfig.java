@@ -55,9 +55,9 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .authorizeRequests()
                 // Toujours mettre en priorité les requêtes spécialisées, et après, les requêtes générales
-//                .antMatchers(HttpMethod.PUT, "/products").hasRole("ADMINISTRATOR") /*Seul un admin peut faire des requêtes PUT*/
-//                .antMatchers("/basket/**").authenticated()    /*Accès autorisé si connexion*/
-//                .antMatchers(HttpMethod.GET,"/products/**").permitAll()
+                .antMatchers(HttpMethod.POST, "/users").permitAll()
+                .antMatchers("/users/**").authenticated()
+                .antMatchers("/orders/**").authenticated()
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
                 .and()

@@ -4,6 +4,7 @@ import be.technifutur.labo3.dto.UserDTO;
 import be.technifutur.labo3.entity.User;
 import be.technifutur.labo3.service.UserService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -21,6 +22,7 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
 
     @Override
     @GetMapping
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<List<UserDTO>> getAll() {
         return ResponseEntity.ok(this.userService.getAll());
     }
@@ -50,8 +52,8 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
         return ResponseEntity.ok(this.userService.delete(integer));
     }
 
-    @PostMapping(path = "/auth")
+   /* @PostMapping(path = "/auth")
     public ResponseEntity<User> auth(@RequestBody UserDTO user) {
         return ResponseEntity.ok(this.userService.auth(user));
-    }
+    }*/
 }

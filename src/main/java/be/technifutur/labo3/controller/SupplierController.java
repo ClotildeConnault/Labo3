@@ -35,18 +35,21 @@ public class SupplierController implements RestControllable<Supplier, SupplierDT
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> insert(@RequestBody Supplier supplier) {
         return ResponseEntity.ok(this.supplierService.insert(supplier));
     }
 
     @Override
     @PutMapping (path = "/{id}" )
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> update(@RequestBody Supplier supplier, @PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.supplierService.update(supplier,integer));
     }
 
     @Override
     @DeleteMapping (path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.supplierService.delete(integer));
     }

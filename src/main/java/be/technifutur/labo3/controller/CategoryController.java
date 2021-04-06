@@ -4,6 +4,7 @@ import be.technifutur.labo3.dto.CategoryDTO;
 import be.technifutur.labo3.entity.Category;
 import be.technifutur.labo3.service.CategoryService;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -33,18 +34,21 @@ public class CategoryController implements RestControllable<Category, CategoryDT
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> insert(@RequestBody Category category) {
         return ResponseEntity.ok(this.categoryService.insert(category));
     }
 
     @Override
     @PutMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> update(@RequestBody Category category, @PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.categoryService.update(category, integer));
     }
 
     @Override
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(this.categoryService.delete(integer));
     }

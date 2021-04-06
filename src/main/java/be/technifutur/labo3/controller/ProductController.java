@@ -5,6 +5,7 @@ import be.technifutur.labo3.entity.Product;
 import be.technifutur.labo3.service.ProductService;
 import org.springframework.data.domain.Page;
 import org.springframework.http.ResponseEntity;
+import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -40,18 +41,21 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
 
     @Override
     @PostMapping
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> insert(@RequestBody Product product) {
         return ResponseEntity.ok(service.insert(product));
     }
 
     @Override
     @PutMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> update(@RequestBody Product product, @PathVariable("id") Integer integer) {
         return ResponseEntity.ok(service.update(product, integer));
     }
 
     @Override
     @DeleteMapping(path = "/{id}")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
     public ResponseEntity<Boolean> delete(@PathVariable("id") Integer integer) {
         return ResponseEntity.ok(service.delete(integer));
     }
