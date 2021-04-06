@@ -2,6 +2,8 @@ package be.technifutur.labo3.config;
 
 import be.technifutur.labo3.entity.*;
 import be.technifutur.labo3.service.*;
+import com.fasterxml.jackson.core.JsonProcessingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
 import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Service;
 
@@ -136,14 +138,14 @@ public class DataInit implements InitializingBean {
             User.builder()
                     .firstName("Clotilde")
                     .lastName("Connault")
-                    .address(new Address("Rue du Faubourg Saint-Honoré",55,"75008","Paris 8e","France"))
+                  //  .address(new Address("Rue du Faubourg Saint-Honoré",55,"75008","Paris 8e","France"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Clo")
                     .password("3LYS33")
-                    .accountNonExpired(true)
+                  /*  .accountNonExpired(true)
                     .accountNonLocked(true)
                     .credentialsNonExpired(true)
-                    .enabled(true)
+                    .enabled(true)*/
                     .build(),
             User.builder()
                     .firstName("Benjamin")
@@ -206,7 +208,9 @@ public class DataInit implements InitializingBean {
                     .build()
     );
 
-    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService) throws FileNotFoundException {
+    public DataInit(ProductService productService, CategoryService categoryService, UserService userService, SupplierService supplierService, PurchaseService purchaseService) throws FileNotFoundException, JsonProcessingException {
+
+
         this.productService = productService;
         this.categoryService = categoryService;
         this.userService = userService;
@@ -216,6 +220,9 @@ public class DataInit implements InitializingBean {
 
     @Override
     public void afterPropertiesSet() throws Exception {
+
+   /*     ObjectMapper mapper = new ObjectMapper();
+        System.out.println(mapper.writeValueAsString(users.get(0)));*/
         categories.forEach(categoryService::insert);
         suppliers.forEach(supplierService::insert);
         products.forEach(productService::insert);

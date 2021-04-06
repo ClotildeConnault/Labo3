@@ -56,7 +56,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .authorizeRequests()
                 // Toujours mettre en priorité les requêtes spécialisées, et après, les requêtes générales
                 .antMatchers(HttpMethod.POST, "/users").permitAll()
-                .antMatchers("/users/**").authenticated()
+              //  .antMatchers("/users/**").authenticated()
                 .antMatchers("/orders/**").authenticated()
 //                .anyRequest().authenticated()
                 .anyRequest().permitAll()
