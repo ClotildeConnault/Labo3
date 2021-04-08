@@ -19,6 +19,7 @@ import java.util.List;
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
 @Builder
 @Entity
+@Table(name = "utilisateur")
 public class User implements UserDetails {
 
     @Id
