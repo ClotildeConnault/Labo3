@@ -178,4 +178,26 @@ public class Mapper {
                 .build();
     }
 
+    public ProductLogDTO toProductLogDTO(ProductLog log) {
+        return ProductLogDTO.builder()
+                .id(log.getId())
+                .productId(log.getProductId())
+                .oldProduct(log.getOldProduct())
+                .newProduct(log.getNewProduct())
+                .userId(log.getUserId())
+                .logDate(log.getLogDate())
+                .build();
+    }
+
+    public ProductLog toProductLogEntity(ProductLogDTO dto) {
+        return ProductLog.builder()
+                .id(dto.getId())
+                .productId(dto.getProductId())
+                .oldProduct(dto.getOldProduct())
+                .newProduct(dto.getNewProduct())
+                .userId(dto.getUserId())
+                .logDate(dto.getLogDate())
+                .build();
+    }
+
 }
