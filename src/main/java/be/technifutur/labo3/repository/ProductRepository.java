@@ -12,10 +12,10 @@ import org.springframework.data.repository.PagingAndSortingRepository;
 import java.util.List;
 
 public interface ProductRepository extends JpaRepository<Product, Integer>, QuerydslPredicateExecutor<Product>, PagingAndSortingRepository<Product, Integer>, CrudRepository<Product, Integer> {
-    @Query
+//    @Query
     List<Product> findByInactiveFalse();
 
-    @Query(value = "SELECT * FROM PRODUCT WHERE product_inactive = false", nativeQuery = true)
+//    @Query(value = "SELECT * FROM PRODUCT WHERE product_inactive = false", nativeQuery = true)
     Page<Product> findByInactiveFalse(Pageable var1);
 
 

@@ -14,7 +14,6 @@ import java.time.Instant;
 @NoArgsConstructor
 @AllArgsConstructor
 @FieldDefaults(level = lombok.AccessLevel.PRIVATE)
-@DynamicInsert
 public class ProductLog {
 
     @Id
