@@ -1,6 +1,7 @@
 package be.technifutur.labo3.controller;
 
 import be.technifutur.labo3.dto.UserDTO;
+import be.technifutur.labo3.dto.UserUpdateDTO;
 import be.technifutur.labo3.entity.User;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.service.UserService;
@@ -9,6 +10,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import java.util.Map;
 
 @CrossOrigin
 @RestController
@@ -47,6 +49,15 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
     public ResponseEntity<Boolean> update(@RequestBody User user, @PathVariable("id") Integer integer) {
 
         return ResponseEntity.ok(this.userService.update(user, integer));
+    }
+
+
+    @PatchMapping(path = "/{id}")
+    public ResponseEntity<Boolean> partialUpdate(@RequestBody UserUpdateDTO userUpdate, @PathVariable("id") Integer id) {
+        System.out.println("CONTROLLER");
+        this.userService.partialUpdate(userUpdate, id);
+        System.out.println("CONTROLLER2");
+        return ResponseEntity.ok(this.userService.partialUpdate(userUpdate, id));
     }
 
     @Override

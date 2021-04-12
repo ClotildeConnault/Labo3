@@ -1,16 +1,20 @@
 package be.technifutur.labo3.service;
 
 import be.technifutur.labo3.dto.UserDTO;
+import be.technifutur.labo3.dto.UserUpdateDTO;
 import be.technifutur.labo3.entity.User;
 import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.UserRepository;
+import be.technifutur.labo3.util.JsonNullableUtils;
 import org.springframework.security.core.userdetails.UserDetails;
 import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.security.core.userdetails.UsernameNotFoundException;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+
 import java.util.List;
+import java.util.Map;
 import java.util.NoSuchElementException;
 import java.util.stream.Collectors;
 
@@ -50,7 +54,6 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
         user.setAccountNonLocked(true);
 
         User newUser = this.userRepository.save(user);
-        System.out.println("J'insère");
         return this.userRepository.findById(newUser.getId()).isPresent();
     }
 
@@ -58,7 +61,6 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
     public boolean update(User user, Integer integer) {
 
         User oldUser = this.userRepository.getOne(integer);
-        System.out.println(oldUser.getFirstName());
         User userToTest = new User(
                 oldUser.getId(),
                 oldUser.getFirstName(),
@@ -73,9 +75,44 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
                 oldUser.isCredentialsNonExpired(),
                 oldUser.isEnabled()
         );
-        System.out.println("Il repassera par là");
         user.setId(integer);
+        user.setPassword(passwordEncoder.encode(user.getPassword()));
         this.userRepository.save(user);
+        return !userToTest.equals(this.userRepository.getOne(integer));
+    }
+
+    public boolean partialUpdate(UserUpdateDTO userUpdate, Integer integer) {
+
+        User oldUser = this.userRepository.getOne(integer);
+
+        User userToTest = new User(
+                oldUser.getId(),
+                oldUser.getFirstName(),
+                oldUser.getLastName(),
+                oldUser.getAccessLevel(),
+                oldUser.getUsername(),
+                oldUser.getPassword(),
+                oldUser.getAddress(),
+                oldUser.getPurchases(),
+                oldUser.isAccountNonExpired(),
+                oldUser.isAccountNonLocked(),
+                oldUser.isCredentialsNonExpired(),
+                oldUser.isEnabled()
+        );
+
+        JsonNullableUtils.changeIfPresent(userUpdate.getFirstName(), userToTest::setFirstName);
+        JsonNullableUtils.changeIfPresent(userUpdate.getLastName(), userToTest::setLastName);
+        JsonNullableUtils.changeIfPresent(userUpdate.getId(), userToTest::setId);
+        JsonNullableUtils.changeIfPresent(userUpdate.getAccessLevel(), userToTest::setAccessLevel);
+        JsonNullableUtils.changeIfPresent(userUpdate.getUsername(), userToTest::setUsername);
+        JsonNullableUtils.changeIfPresent(userUpdate.getPassword(), e -> userToTest.setPassword(passwordEncoder.encode(e)));;
+        JsonNullableUtils.changeIfPresent(userUpdate.getFirstName(), userToTest::setFirstName);
+        JsonNullableUtils.changeIfPresent(userUpdate.getFirstName(), userToTest::setFirstName);
+        JsonNullableUtils.changeIfPresent(userUpdate.getFirstName(), userToTest::setFirstName);
+
+        System.out.println("OUI");
+        this.userRepository.save(userToTest);
+        System.out.println("OUI2");
         return !userToTest.equals(this.userRepository.getOne(integer));
     }
 

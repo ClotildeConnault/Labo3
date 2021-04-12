@@ -8,17 +8,25 @@ import org.springframework.web.bind.annotation.RestControllerAdvice;
 
 import java.util.NoSuchElementException;
 
-@RestControllerAdvice
+//@RestControllerAdvice
 public class ExceptionHandlerController {
 
     @ExceptionHandler(Throwable.class)
     public ResponseEntity<ErrorDTO> handle(Throwable e){
         if(e.getMessage() != null){
-            if (e instanceof NoSuchElementException){
-                return ResponseEntity
-                        .status(HttpStatus.NOT_ACCEPTABLE)
-                        .body(new ErrorDTO(e.getMessage()));
-            }
+
+            return ResponseEntity
+                    .status(HttpStatus.NOT_ACCEPTABLE)
+                    .body(new ErrorDTO(e.getMessage()));
+
+//            if (e instanceof NoSuchElementException){
+//                return ResponseEntity
+//                        .status(HttpStatus.NOT_ACCEPTABLE)
+//                        .body(new ErrorDTO(e.getMessage()));
+//            }
+
+
+
         }
 
     return ResponseEntity.status(HttpStatus.INTERNAL_SERVER_ERROR)
