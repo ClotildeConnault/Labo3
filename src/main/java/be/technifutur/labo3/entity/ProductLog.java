@@ -24,13 +24,11 @@ public class ProductLog {
     @Column(nullable = false)
     int productId;
 
-    @ManyToOne
-//    @NonNull
-    Product oldProduct;
+    @Column(nullable = false, length = 250000)
+    String oldProduct;
 
-    @ManyToOne
-//    @NonNull
-    Product newProduct;
+    @Column(nullable = false, length = 250000)
+    String newProduct;
 
     @Column(nullable = false)
     int userId;
