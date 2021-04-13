@@ -16,8 +16,8 @@ public class ProductLogDTO {
 
     int id;
     int productId;
-    Product oldProduct;
-    Product newProduct;
+    String oldProduct;
+    String newProduct;
     int userId;
     Instant logDate;
 }
