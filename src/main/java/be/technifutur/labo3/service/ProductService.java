@@ -8,10 +8,7 @@ import be.technifutur.labo3.mapper.Mapper;
 import be.technifutur.labo3.repository.ProductRepository;
 import be.technifutur.labo3.repository.SupplierRepository;
 import com.querydsl.core.BooleanBuilder;
-import org.springframework.data.domain.Page;
-import org.springframework.data.domain.PageImpl;
-import org.springframework.data.domain.PageRequest;
-import org.springframework.data.domain.Pageable;
+import org.springframework.data.domain.*;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -141,13 +138,25 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
                 .collect(Collectors.toList());
     }
 
-    public Page<ProductDTO> getAllWithPagination(int page, int size){
+    public Page<ProductDTO> getAllWithPagination(int page, int size, String sortingFieldName, String sortingDirection){
 
 //        long total = this.productRepository.findAll().stream().count();
         long total = this.productRepository.findByInactiveFalse().size();
 
+        Pageable pageable = null;
+        if (sortingFieldName.equalsIgnoreCase("") && sortingDirection.equalsIgnoreCase("")){
+            pageable= PageRequest.of(page,size);
+        } else{
+            if (sortingDirection.equalsIgnoreCase("asc")){
+                pageable=PageRequest.of(page,size, Sort.by(sortingFieldName));
+            } else if (sortingDirection.equalsIgnoreCase("desc")){
+                pageable=PageRequest.of(page,size, Sort.by(sortingFieldName).descending());
+            }
+        }
+
+
 //        List<ProductDTO> result = this.productRepository.findAll(PageRequest.of(page, size))
-        List<ProductDTO> result = this.productRepository.findByInactiveFalse(PageRequest.of(page, size))
+        List<ProductDTO> result = this.productRepository.findByInactiveFalse(pageable)
                 .stream()
                 .map(mapper::toProductDTO)
                 .collect(Collectors.toList());

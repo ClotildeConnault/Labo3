@@ -28,9 +28,9 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
         return ResponseEntity.ok(service.getAll());
     }
 
-    @GetMapping(params = {"page", "size"})
-    public ResponseEntity<Page<ProductDTO>> getAllWithPagination(@RequestParam("page") int page, @RequestParam("size") int size){
-        return ResponseEntity.ok((this.service.getAllWithPagination(page,size)));
+    @GetMapping(params = {"page", "size", "sortingFieldName", "sortingDirection"})
+    public ResponseEntity<Page<ProductDTO>> getAllWithPagination(@RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("sortingFieldName") String sortingFieldName, @RequestParam("sortingDirection") String sortingDirection){
+        return ResponseEntity.ok((this.service.getAllWithPagination(page,size,sortingFieldName,sortingDirection)));
     }
 
     @Override
