@@ -37,7 +37,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     @Bean
     public CorsConfigurationSource corsConfigurationSource() {
         CorsConfiguration config = new CorsConfiguration();
-        config.addAllowedOrigin("http://localhost:4200");
+        config.addAllowedOrigin("https://labofront.herokuapp.com/");
         config.addAllowedMethod("*");
         config.addAllowedHeader("*");
         config.addExposedHeader("Authorization");
