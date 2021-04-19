@@ -53,7 +53,7 @@ public class CategoryService implements Crudable<Category, CategoryDTO, Integer>
     @Override
     public boolean delete(Integer integer) {
         this.categoryRepository.deleteById(integer);
-        return this.categoryRepository.findById(integer).isEmpty();
+        return !this.categoryRepository.findById(integer).isPresent();
     }
 
 }

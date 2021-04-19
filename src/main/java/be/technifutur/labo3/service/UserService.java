@@ -117,7 +117,7 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
     @Override
     public boolean delete(Integer integer) {
         this.userRepository.deleteById(integer);
-        return this.userRepository.findById(integer).isEmpty();
+        return !this.userRepository.findById(integer).isPresent();
     }
 
 //    public User auth(UserDTO user) {

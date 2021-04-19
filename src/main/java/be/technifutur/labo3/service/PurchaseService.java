@@ -74,6 +74,6 @@ public class PurchaseService implements Crudable<Purchase, PurchaseDTO, Integer>
     @Override
     public boolean delete(Integer integer) {
         this.purchaseRepository.deleteById(integer);
-        return this.purchaseRepository.findById(integer).isEmpty();
+        return !this.purchaseRepository.findById(integer).isPresent();
     }
 }
