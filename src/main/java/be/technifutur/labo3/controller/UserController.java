@@ -54,9 +54,7 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
 
     @PatchMapping(path = "/{id}")
     public ResponseEntity<Boolean> partialUpdate(@RequestBody UserUpdateDTO userUpdate, @PathVariable("id") Integer id) {
-        System.out.println("CONTROLLER");
         this.userService.partialUpdate(userUpdate, id);
-        System.out.println("CONTROLLER2");
         return ResponseEntity.ok(this.userService.partialUpdate(userUpdate, id));
     }
 
