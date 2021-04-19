@@ -86,7 +86,7 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
         return product.isInactive();
     }
 
-    public List<ProductDTO> searchByProductName(String productName){
+    public Page<ProductDTO> searchByProductName(String productName, int page, int size, String sortingFieldName, String sortingDirection){
 
         BooleanBuilder predicate = new BooleanBuilder();
 
@@ -96,14 +96,31 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
             predicate.and(qProduct.name.containsIgnoreCase(productName));
         }
 
-        Iterable<Product> result = this.productRepository.findAll(predicate);
+        Pageable pageable = null;
+        if (sortingFieldName.equalsIgnoreCase("") && sortingDirection.equalsIgnoreCase("")){
+            pageable= PageRequest.of(page,size);
+        } else{
+            if (sortingDirection.equalsIgnoreCase("asc")){
+                pageable=PageRequest.of(page,size, Sort.by(sortingFieldName));
+            } else if (sortingDirection.equalsIgnoreCase("desc")){
+                pageable=PageRequest.of(page,size, Sort.by(sortingFieldName).descending());
+            }
+        }
 
-        return StreamSupport.stream(result.spliterator(),false)
+        List<ProductDTO> result = this.productRepository.findAll(predicate,pageable)
+                .stream()
                 .map(mapper::toProductDTO)
+                .filter(p -> !p.isInactive())
                 .collect(Collectors.toList());
+        long total = StreamSupport.stream(this.productRepository.findAll(predicate).spliterator(),false)
+                .collect(Collectors.toList())
+                .stream()
+                .filter(p -> !p.isInactive())
+                .count();
+        return new PageImpl<>(result, PageRequest.of(page, size), total);
     }
 
-    public List<ProductDTO> searchByProduct(Product product){
+    public Page<ProductDTO> searchByProduct(Product product, int page, int size, String sortingFieldName, String sortingDirection){
         BooleanBuilder predicate = new BooleanBuilder();
 
         QProduct qProduct = QProduct.product;
@@ -131,11 +148,28 @@ public class ProductService implements Crudable<Product, ProductDTO, Integer> {
             predicate.and(qProduct.quantity.goe((product.getQuantity())));
         }
 
-        Iterable<Product> result = this.productRepository.findAll(predicate);
+        Pageable pageable = null;
+        if (sortingFieldName.equalsIgnoreCase("") && sortingDirection.equalsIgnoreCase("")){
+            pageable= PageRequest.of(page,size);
+        } else{
+            if (sortingDirection.equalsIgnoreCase("asc")){
+                pageable=PageRequest.of(page,size, Sort.by(sortingFieldName));
+            } else if (sortingDirection.equalsIgnoreCase("desc")){
+                pageable=PageRequest.of(page,size, Sort.by(sortingFieldName).descending());
+            }
+        }
 
-        return StreamSupport.stream(result.spliterator(),false)
+        List<ProductDTO> result = this.productRepository.findAll(predicate,pageable)
+                .stream()
                 .map(mapper::toProductDTO)
+                .filter(p -> !p.isInactive())
                 .collect(Collectors.toList());
+        long total = StreamSupport.stream(this.productRepository.findAll(predicate).spliterator(),false)
+                .collect(Collectors.toList())
+                .stream()
+                .filter(p -> !p.isInactive())
+                .count();
+        return new PageImpl<>(result, PageRequest.of(page, size), total);
     }
 
     public Page<ProductDTO> getAllWithPagination(int page, int size, String sortingFieldName, String sortingDirection){

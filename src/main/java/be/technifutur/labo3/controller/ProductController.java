@@ -60,13 +60,13 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
         return ResponseEntity.ok(service.delete(integer));
     }
 
-    @PostMapping(path = "/searchByName")
-    public ResponseEntity<List<ProductDTO>> searchByName(@RequestBody String productName){
-        return ResponseEntity.ok(service.searchByProductName(productName));
+    @PostMapping(path = "/searchByName", params = {"page", "size", "sortingFieldName", "sortingDirection"})
+    public ResponseEntity<Page<ProductDTO>> searchByName(@RequestBody String productName, @RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("sortingFieldName") String sortingFieldName, @RequestParam("sortingDirection") String sortingDirection){
+        return ResponseEntity.ok(service.searchByProductName(productName,page,size,sortingFieldName,sortingDirection));
     }
 
-    @PostMapping(path = "/search")
-    public ResponseEntity<List<ProductDTO>> search(@RequestBody Product product){
-        return ResponseEntity.ok(service.searchByProduct(product));
+    @PostMapping(path = "/search", params = {"page", "size", "sortingFieldName", "sortingDirection"})
+    public ResponseEntity<Page<ProductDTO>> search(@RequestBody Product product, @RequestParam("page") int page, @RequestParam("size") int size, @RequestParam("sortingFieldName") String sortingFieldName, @RequestParam("sortingDirection") String sortingDirection){
+        return ResponseEntity.ok(service.searchByProduct(product,page,size,sortingFieldName,sortingDirection));
     }
 }
