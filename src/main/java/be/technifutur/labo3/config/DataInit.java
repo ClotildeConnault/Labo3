@@ -143,7 +143,7 @@ public class DataInit implements InitializingBean {
             User.builder()
                     .firstName("Benjamin")
                     .lastName("Valin")
-                    .address(new Address("Rue Gaston Grégoire",17,"4540","Amay","Belgique"))
+                    .address(new Address("Rue du G33k",42,"1337","LeetCity","Belgique"))
                     .accessLevel(AccessLevel.ADMINISTRATOR)
                     .username("Chbench")
                     .password("1234")

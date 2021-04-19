@@ -110,9 +110,7 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
         JsonNullableUtils.changeIfPresent(userUpdate.getFirstName(), userToTest::setFirstName);
         JsonNullableUtils.changeIfPresent(userUpdate.getFirstName(), userToTest::setFirstName);
 
-        System.out.println("OUI");
         this.userRepository.save(userToTest);
-        System.out.println("OUI2");
         return !userToTest.equals(this.userRepository.getOne(integer));
     }
 
@@ -122,29 +120,29 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
         return this.userRepository.findById(integer).isEmpty();
     }
 
-    public User auth(UserDTO user) {
-
-        User userToReturn = null;
-
-        List<UserDTO> users = getAll();
-        users.forEach(u -> {
-            System.out.println(u.getUsername());
-            System.out.println(u.getPassword());
-        });
-
-        boolean isPresent = users.stream()
-                .anyMatch(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()));
-
-        if (isPresent) {
-           userToReturn = users.stream()
-                    .filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()))
-                    .map(mapper::toUserEntity)
-                    .findFirst().orElseThrow(NoSuchElementException::new);
-            return userToReturn;
-        }
-
-        return null;
-    }
+//    public User auth(UserDTO user) {
+//
+//        User userToReturn = null;
+//
+//        List<UserDTO> users = getAll();
+//        users.forEach(u -> {
+//            System.out.println(u.getUsername());
+//            System.out.println(u.getPassword());
+//        });
+//
+//        boolean isPresent = users.stream()
+//                .anyMatch(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()));
+//
+//        if (isPresent) {
+//           userToReturn = users.stream()
+//                    .filter(u -> u.getUsername().equals(user.getUsername()) && u.getPassword().equals(user.getPassword()))
+//                    .map(mapper::toUserEntity)
+//                    .findFirst().orElseThrow(NoSuchElementException::new);
+//            return userToReturn;
+//        }
+//
+//        return null;
+//    }
 
     @Override
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
