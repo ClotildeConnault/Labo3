@@ -73,4 +73,9 @@ public class UserController implements RestControllable<User, UserDTO, Integer> 
     public ResponseEntity<UserDTO> getUserWithPseudo(@RequestBody User user) {
         return ResponseEntity.ok(this.mapper.toUserDTO((User)this.userService.loadUserByUsername(user.getUsername())));
     }
+
+    @PostMapping(path = "/exist")
+    public ResponseEntity<Boolean> userExistByPseudo(@RequestBody String username){
+        return ResponseEntity.ok(this.userService.userExistByUsername(username));
+    }
 }

@@ -148,4 +148,8 @@ public class UserService implements Crudable<User, UserDTO, Integer>, UserDetail
     public UserDetails loadUserByUsername(String s) throws UsernameNotFoundException {
         return this.userRepository.findByUsername(s).orElseThrow(() -> new UsernameNotFoundException("J'ai pas trouvé l'utilisateur " + s));
     }
+
+    public boolean userExistByUsername(String userName){
+        return this.userRepository.findByUsername(userName).isPresent();
+    }
 }
