@@ -36,7 +36,7 @@ public class User implements UserDetails {
     @Column(nullable = false)
     AccessLevel accessLevel;
 
-    @Column(nullable = false)
+    @Column(nullable = false, unique = true)
     String username;
 
     @Column(nullable = false)
