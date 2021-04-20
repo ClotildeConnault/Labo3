@@ -48,7 +48,7 @@ public class ProductController implements RestControllable<Product, ProductDTO, 
 
     @Override
     @PutMapping(path = "/{id}")
-    @PreAuthorize("hasAuthority('ADMINISTRATOR')")
+    @PreAuthorize("hasAuthority('ADMINISTRATOR') or hasAuthority('CUSTOMER')")
     public ResponseEntity<Boolean> update(@RequestBody Product product, @PathVariable("id") Integer integer) {
         return ResponseEntity.ok(service.update(product, integer));
     }
